@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\Auth\UserRegisterRequest;
+use App\Lib\User\User;
+use App\Lib\User\UserFactory;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -17,6 +18,8 @@ class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
+     *
+     * @return View
      */
     public function create(): View
     {
@@ -26,9 +29,10 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @param UserRegisterRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(UserRegisterRequest $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -36,11 +40,11 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        $user = UserFactory::emerge([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ])->save();
 
         event(new Registered($user));
 
