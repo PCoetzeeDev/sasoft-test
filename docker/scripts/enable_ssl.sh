@@ -18,9 +18,9 @@ mkcert -cert-file ../nginx/certs/localcert.pem -key-file ../nginx/certs/localkey
 cp ../nginx/sites/https.conf ../nginx/conf.d/findme.conf
 
 echo "SSL enabled"
-echo "Press CTRL+C to exit..."
-
-while :
-do
-	sleep 1
-done
+#echo "Press CTRL+C to exit..."
+#
+#while :
+#do
+#	sleep 1
+#done
