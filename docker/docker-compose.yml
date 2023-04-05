@@ -61,8 +61,8 @@ services:
             PGDATA: ${DB_PATH_ON_CONTAINER} # Bit of a hack to get past the config file being written here before the data is written on build
         volumes:
             - ${DB_VOLUME}:/var/lib/postgresql/data
-            # - ./postgresql/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf # TODO - decide what to do here
-            # - ./postgresql/postgresql.conf:/var/lib/postgresql/data/postgresql.conf # TODO - decide what to do here
+            - ./postgresql/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf # TODO - decide what to do here
+            - ./postgresql/postgresql.conf:/var/lib/postgresql/data/postgresql.conf # TODO - decide what to do here
         networks:
             - findme-energy-network
 
