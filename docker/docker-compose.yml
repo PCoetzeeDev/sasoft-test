@@ -23,6 +23,7 @@ services:
         volumes:
             - ../src:/usr/share/nginx/findme.local # code
             - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker for ssh access to container
+            - ./nginx/certs/:/certs/ # ssl certs
         #     - ./php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
         #   extra_hosts: # extra parameter for xdebug to work on linux/mac
         #     - "host.docker.internal:host-gateway"
