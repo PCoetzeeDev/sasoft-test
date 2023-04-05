@@ -2,7 +2,7 @@
 
 namespace App\Lib\User;
 
-use App\BaseClasses\BaseFactory;
+use App\Base\BaseFactory;
 use Illuminate\Support\Str;
 
 /**

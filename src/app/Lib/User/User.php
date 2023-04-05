@@ -3,7 +3,7 @@
 namespace App\Lib\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\BaseClasses\BaseModel;
+use App\Base\BaseModel;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Auth\Authenticatable;

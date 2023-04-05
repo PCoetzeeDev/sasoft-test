@@ -1,6 +1,6 @@
 <?php
 
-namespace App\BaseClasses;
+namespace App\Base;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
