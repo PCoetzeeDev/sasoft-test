@@ -1,38 +1,38 @@
 version: "3"
 services:
     # php-fpm
-    base-example-php:
+    findme-energy-app:
         build:
             context: php-fpm/
             dockerfile: php-fpm-debian.dockerfile
             args:
                 - APP_USER=${APP_USER}
-        container_name: base-example-php
+        container_name: findme-energy-app
         restart: unless-stopped
         tty: true
         working_dir: /usr/share/nginx
         depends_on:
-            - base-example-db
-            - base-example-redis
-            - base-example-mailhog
+            - findme-energy-db
+            - findme-energy-redis
+            - findme-energy-mailhog
         environment:
             SERVICE_NAME: ${APP_SERVICE_NAME}
             SERVICE_TAGS: ${APP_SERVICE_TAGS}
             APP_USER: ${APP_USER}
             SSH_AUTH_SOCK: /ssh-agent
         volumes:
-            - ../src:/usr/share/nginx/example.local # code
+            - ../src:/usr/share/nginx/findme.local # code
             - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker for ssh access to container
         #     - ./php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
         #   extra_hosts: # extra parameter for xdebug to work on linux/mac
         #     - "host.docker.internal:host-gateway"
         networks:
-            - base-example-network
+            - findme-energy-network
 
     # The Cache
-    base-example-redis:
+    findme-energy-redis:
         image: redis:latest
-        container_name: base-example-redis
+        container_name: findme-energy-redis
         environment:
             SERVICE_NAME: ${CACHE_SERVICE_NAME}
             SERVICE_TAGS: ${CACHE_SERVICE_TAGS}
@@ -41,12 +41,12 @@ services:
         ports:
             - "6379:6379"
         networks:
-            - base-example-network
+            - findme-energy-network
 
     # PostgreSQL Service
-    base-example-db:
+    findme-energy-db:
         image: postgres:latest
-        container_name: base-example-db
+        container_name: findme-energy-db
         restart: unless-stopped
         tty: true
         ports:
@@ -63,12 +63,12 @@ services:
             # - ./postgresql/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf # TODO - decide what to do here
             # - ./postgresql/postgresql.conf:/var/lib/postgresql/data/postgresql.conf # TODO - decide what to do here
         networks:
-            - base-example-network
+            - findme-energy-network
 
     # Mailhog email catchall
-    base-example-mailhog:
+    findme-energy-mailhog:
         image: mailhog/mailhog:latest
-        container_name: base-example-mailhog
+        container_name: findme-energy-mailhog
         restart: unless-stopped
         tty: true
         logging:
@@ -77,16 +77,16 @@ services:
             - "8025:8025"
             - "1025:1025"
         networks:
-            - base-example-network
+            - findme-energy-network
 
     # Nginx Service
-    base-example-nginx:
+    findme-energy-nginx:
         image: nginx:latest
-        container_name: base-example-nginx
+        container_name: findme-energy-nginx
         restart: unless-stopped
         tty: true
         depends_on:
-            - base-example-php
+            - findme-energy-app
         environment:
             SERVICE_NAME: ${WEB_SERVICE_NAME}
             SERVICE_TAGS: ${WEB_SERVICE_TAGS}
@@ -94,19 +94,19 @@ services:
             - "80:80"
             - "443:443"
         volumes:
-            - ../src:/usr/share/nginx/example.local # code
+            - ../src:/usr/share/nginx/findme.local # code
             - ./nginx/conf.d/:/etc/nginx/conf.d/ # site conf
             - ./nginx/certs/:/etc/nginx/certs/ # ssl certs
         networks:
-            - base-example-network
+            - findme-energy-network
 
 
 # Docker Networks
 networks:
-    base-example-network:
+    findme-energy-network:
         driver: bridge
 
 # Volumes
 volumes:
-    base-example-network-db-data:
+    findme-energy-db-data:
         driver: local

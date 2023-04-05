@@ -6,7 +6,7 @@ trap cleanup INT
 
 function cleanup() {
   echo "Exit called, cleaning up and reverting to http..."
-  cp ../nginx/sites/http.conf ../nginx/conf.d/example.conf
+  cp ../nginx/sites/http.conf ../nginx/conf.d/findme.conf
   rm ../nginx/certs/*.pem
   mkcert -uninstall
   echo "Goodbye!"
@@ -14,8 +14,8 @@ function cleanup() {
 }
 
 mkcert -install
-mkcert -cert-file ../nginx/certs/localcert.pem -key-file ../nginx/certs/localkey.pem "example.local"
-cp ../nginx/sites/https.conf ../nginx/conf.d/example.conf
+mkcert -cert-file ../nginx/certs/localcert.pem -key-file ../nginx/certs/localkey.pem "findme.local"
+cp ../nginx/sites/https.conf ../nginx/conf.d/findme.conf
 
 echo "SSL enabled"
 echo "Press CTRL+C to exit..."

@@ -1,5 +1,5 @@
-[example.local]
-listen = /run/lock/example.local.sock
+[findme.local]
+listen = /run/lock/findme.local.sock
 ;user = www-data
 ;group = www-data
 pm = dynamic

@@ -1,2 +1,4 @@
-# base-php
-Basic PHP/Laravel local dev environment
+# findme.energy
+A site for matching alternative energy installers with potential clients
+
+### TODO
