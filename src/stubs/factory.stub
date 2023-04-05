@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Lib\{{ factory }};
+
+use App\Base\BaseFactory;
+
+/**
+ * @extends App\Base\BaseFactory
+ */
+class {{ factory }}Factory extends BaseFactory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            //
+        ];
+    }
+}
