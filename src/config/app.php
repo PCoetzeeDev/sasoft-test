@@ -143,6 +143,8 @@ return [
         // 'store'  => 'redis',
     ],
 
+    'domain_dir' => env('DOMAIN_DIR', base_path() . '/app/Lib'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
