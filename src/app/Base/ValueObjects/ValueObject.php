@@ -102,14 +102,6 @@ abstract class ValueObject extends Model implements IValueObjectInterface
     }
 
     /**
-     * @return bool
-     */
-    public function isActive (): bool
-    {
-        return $this->active;
-    }
-
-    /**
      * @param $slug
      * @return bool
      * @throws ValueObjectMissingDataException

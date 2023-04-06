@@ -32,7 +32,11 @@
             "App\\Lib\\": "app/Lib",
             "App\\Base\\": "app/Base",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Utils/string_helpers.php",
+            "app/Utils/migration_helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

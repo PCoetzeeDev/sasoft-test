@@ -50,11 +50,6 @@ interface IValueObjectInterface
     public function getOrder () : int;
 
     /**
-     * @return bool
-     */
-    public function isActive () : bool;
-
-    /**
      * @param string $slug
      * @return bool
      */
