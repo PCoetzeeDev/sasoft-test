@@ -19,8 +19,11 @@ class MakeDomainCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Create a directory for a new domain in the correct folder';
 
+    /**
+     * @var string
+     */
     protected string $domainName;
 
 
