@@ -1,13 +1,13 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Lib\Profile;
 
 use App\Base\BaseFactory;
 
 /**
  * @extends BaseFactory
  */
-class {{ class }}Factory extends BaseFactory
+class ProfileFactory extends BaseFactory
 {
     /**
      * Define the model's default state.

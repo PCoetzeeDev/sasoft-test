@@ -3,11 +3,11 @@
 namespace {{ namespace }};
 
 use App\Base\BaseEntity;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+{{ factory }}
 
 class {{ class }} extends BaseEntity
 {
-    use HasFactory;
+    {{ hasfactory }}
 
     protected $table = '{{ table }}';
 

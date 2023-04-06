@@ -13,7 +13,7 @@ class MakeEntityCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:entity {domainName} {entityName}';
+    protected $signature = 'make:entity {domainName} {entityName} {--createFactory}';
 
     /**
      * The console command description.
@@ -32,7 +32,10 @@ class MakeEntityCommand extends Command
      */
     protected string $entityName;
 
+    protected bool $createFactory;
+
     const STUB = 'entity.stub';
+    const FACTORY_STUB = 'factory.stub';
 
 
     /**
@@ -55,6 +58,7 @@ class MakeEntityCommand extends Command
     {
         $this->domainName = $this->argument('domainName');
         $this->entityName = $this->argument('entityName');
+        $this->createFactory = $this->option('createFactory');
 
         $domainPath = config('app.domain_dir');
         $domainFullPath = $domainPath . '/' . $this->domainName;
@@ -68,8 +72,7 @@ class MakeEntityCommand extends Command
             File::ensureDirectoryExists($domainFullPath);
 
             $fileContent = file_get_contents(__DIR__ . '/../../../stubs/' . self::STUB);
-
-            foreach ($this->getStubVariables() as $variable => $replacement) {
+            foreach ($this->getStubVariables(self::STUB) as $variable => $replacement) {
                 $fileContent = str_replace('{{ '.$variable.' }}' , $replacement, $fileContent);
             }
 
@@ -77,6 +80,21 @@ class MakeEntityCommand extends Command
                 $this->info('Created new entity at ' . $fullEntityPath);
             } else {
                 throw new \Exception('Failed to create new entity');
+            }
+
+            if ($this->createFactory === true) {
+                $fileContent = file_get_contents(__DIR__ . '/../../../stubs/' . self::FACTORY_STUB);
+                foreach ($this->getStubVariables(self::FACTORY_STUB) as $variable => $replacement) {
+                    $fileContent = str_replace('{{ '.$variable.' }}' , $replacement, $fileContent);
+                }
+
+                $factoryPath = $domainFullPath . '/' . Str::studly($this->entityName) . 'Factory.php';
+
+                if (File::put($factoryPath, $fileContent)) {
+                    $this->info('Created new Factory at ' . $factoryPath);
+                } else {
+                    throw new \Exception('Failed to create new Factory');
+                }
             }
         } catch (\Exception $exception) {
             $this->error($exception->getMessage());
@@ -88,12 +106,22 @@ class MakeEntityCommand extends Command
     /**
      * @return string[]
      */
-    protected function getStubVariables() : array
+    protected function getStubVariables(string $stub) : array
     {
-        return [
-            'namespace'         => app()->getNamespace() . 'Lib\\' . Str::studly($this->domainName),
-            'class'             => Str::studly($this->entityName),
-            'table'             => Str::plural(Str::lower($this->entityName))
-        ];
+        switch ($stub) {
+            case self::STUB:
+                return [
+                    'namespace'         => app()->getNamespace() . 'Lib\\' . Str::studly($this->domainName),
+                    'class'             => Str::studly($this->entityName),
+                    'table'             => Str::plural(Str::lower($this->entityName)),
+                    'factory'           => $this->createFactory ? 'use Illuminate\Database\Eloquent\Factories\HasFactory;' : '',
+                    'hasfactory'        => $this->createFactory ? 'use HasFactory;' : '',
+                ];
+            case self::FACTORY_STUB:
+                return [
+                    'namespace'         => app()->getNamespace() . 'Lib\\' . Str::studly($this->domainName),
+                    'class'             => Str::studly($this->entityName),
+                ];
+        }
     }
 }
