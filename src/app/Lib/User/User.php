@@ -3,7 +3,7 @@
 namespace App\Lib\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Base\BaseModel;
+use App\Base\BaseEntity;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Auth\Authenticatable;
@@ -16,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends BaseModel implements
+class User extends BaseEntity implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract

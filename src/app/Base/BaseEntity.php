@@ -4,7 +4,7 @@ namespace App\Base;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseModel extends Model
+class BaseEntity extends Model
 {
     /**
      * @param array $options

@@ -9,9 +9,9 @@ abstract class BaseFactory extends Factory
 {
     /**
      * @param array $data
-     * @return BaseModel
+     * @return BaseEntity
      */
-    public static function emerge(array $data) : BaseModel
+    public static function emerge(array $data) : BaseEntity
     {
         $factory = new static();
 
