@@ -48,7 +48,7 @@ return new class extends Migration
         DB::statement("
             alter table profiles
             add constraint check_name
-            check (company_name is not null or (first_name is not null and last_name is not null))
+            check (profiles.company_name is not null or (profiles.first_name is not null and profiles.last_name is not null))
         ;");
     }
 
