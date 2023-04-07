@@ -44,10 +44,10 @@ if (!function_exists('populate_vo_data')) {
         $rowData = [];
         $now = now('UTC')->format('Y-m-d H:i:s');
 
-        foreach ($slugNames as $slug => $name) {
+        foreach ($slugNames as $slugName) {
             $rowData[] = [
-                'slug' => $slug,
-	            'name' => $name,
+                'slug' => slugify($slugName),
+	            'name' => $slugName,
 	            'order' => $order,
                 'is_active' => true,
                 'created_at' => $now,
