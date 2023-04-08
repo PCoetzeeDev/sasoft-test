@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('failed_jobs', function (Blueprint $table) {
-            $table->id();
-            $table->string('uuid')->unique();
+            $table->bigIncrements('id');
+            $table->uuid()->index();
             $table->text('connection');
             $table->text('queue');
             $table->longText('payload');

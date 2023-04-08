@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -52,7 +53,7 @@ class MakeEntityCommand extends Command
      * Execute the console command.
      *
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle(): void
     {
@@ -66,7 +67,7 @@ class MakeEntityCommand extends Command
 
         try {
             if (File::exists($fullEntityPath)) {
-                throw new \Exception('Entity file already exists');
+                throw new Exception('Entity file already exists');
             }
 
             File::ensureDirectoryExists($domainFullPath);
@@ -79,7 +80,7 @@ class MakeEntityCommand extends Command
             if (File::put($fullEntityPath, $fileContent)) {
                 $this->info('Created new entity at ' . $fullEntityPath);
             } else {
-                throw new \Exception('Failed to create new entity');
+                throw new Exception('Failed to create new entity');
             }
 
             if ($this->createFactory === true) {
@@ -93,10 +94,10 @@ class MakeEntityCommand extends Command
                 if (File::put($factoryPath, $fileContent)) {
                     $this->info('Created new Factory at ' . $factoryPath);
                 } else {
-                    throw new \Exception('Failed to create new Factory');
+                    throw new Exception('Failed to create new Factory');
                 }
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->error($exception->getMessage());
 
             exit(1);
@@ -104,9 +105,11 @@ class MakeEntityCommand extends Command
     }
 
     /**
-     * @return string[]
+     * @param string $stub
+     * @return array
+     * @throws Exception
      */
-    protected function getStubVariables(string $stub) : array
+    private function getStubVariables(string $stub) : array
     {
         switch ($stub) {
             case self::STUB:
@@ -123,5 +126,7 @@ class MakeEntityCommand extends Command
                     'class'             => Str::studly($this->entityName),
                 ];
         }
+
+        throw new Exception("Unknown stub - " . $stub);
     }
 }

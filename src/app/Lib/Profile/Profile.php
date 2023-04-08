@@ -4,6 +4,7 @@ namespace App\Lib\Profile;
 
 use App\Base\BaseEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Profile extends BaseEntity
 {
@@ -16,7 +17,13 @@ class Profile extends BaseEntity
      *
      * @var array<int, string>
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'code',
+        'first_name',
+        'last_name',
+        'company_name',
+        'profile_type_id',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -32,4 +39,18 @@ class Profile extends BaseEntity
      */
     protected $casts = [];
 
+    /**
+     * @return ProfileType
+     */
+    public function getProfileType() : ProfileType
+    {
+        return $this->profile_type ?? new ProfileType();
+    }
+    /**
+     * @return BelongsTo
+     */
+    protected function profile_type() : BelongsTo
+    {
+        return $this->belongsTo(ProfileType::class);
+    }
 }

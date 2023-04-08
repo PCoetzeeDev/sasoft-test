@@ -1,10 +1,10 @@
 <?php namespace App\Base\ValueObjects;
 
+use App\Base\BaseEntity;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 
-abstract class ValueObject extends Model implements IValueObjectInterface
+abstract class ValueObject extends BaseEntity implements IValueObjectInterface
 {
     const ORDER_BY_ORDER = 'order';
 

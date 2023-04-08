@@ -18,8 +18,8 @@ if (!function_exists('create_vo_schema')) {
     {
 		Schema::create($tableName, function (Blueprint $table) use ($softDeletes) {
             $table->increments('id');
-			$table->string('name');
-			$table->string('slug')->unique();
+			$table->text('name');
+			$table->text('slug')->unique();
 			$table->integer('order')->default(1);
 			$table->boolean('is_active')->default(true);
 			$table->timestamps();

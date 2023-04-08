@@ -9,6 +9,7 @@ return new class extends Migration
 {
     const TBL_PROFILES = 'profiles';
     const TBL_PROFILE_TYPES = 'profile_types';
+    const TBL_USERS = 'users';
 
     /**
      * Run the migrations.
@@ -17,19 +18,34 @@ return new class extends Migration
     {
         create_valueobject_schema(self::TBL_PROFILE_TYPES);
         populate_vo_data([
-            'guest',
-            'user',
-            'business',
-            'admin',
+            'Guest',
+            'User',
+            'Business',
+            'Internal',
         ], self::TBL_PROFILE_TYPES);
+
+        DB::table(self::TBL_PROFILE_TYPES)->where('slug', '=', 'internal')->update([
+            'order' => -900,
+        ]);
 
         $guestProfileTypeId = DB::table(self::TBL_PROFILE_TYPES)->where('slug', '=', 'guest')->first()->id;
 
         Schema::create(self::TBL_PROFILES, function (Blueprint $table) use ($guestProfileTypeId) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->uuid('code')->index();
             $table->text('first_name')->nullable();
             $table->text('last_name')->nullable();
             $table->text('company_name')->nullable();
+            create_foreign_key(
+                $table,
+                self::TBL_USERS,
+                'cascade',
+                'user_id',
+                false,
+                true,
+                'id',
+                'NO ACTION',
+            );
             create_foreign_key(
                 $table,
                 self::TBL_PROFILE_TYPES,
@@ -39,7 +55,7 @@ return new class extends Migration
                 false,
                 'id',
                 'NO ACTION',
-                $guestProfileTypeId
+                $guestProfileTypeId,
             );
             $table->softDeletes();
             $table->timestamps();

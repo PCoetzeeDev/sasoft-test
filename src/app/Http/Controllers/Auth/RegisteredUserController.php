@@ -4,14 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UserRegisterRequest;
-use App\Lib\User\User;
 use App\Lib\User\UserFactory;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -34,19 +31,12 @@ class RegisteredUserController extends Controller
      */
     public function store(UserRegisterRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
         $user = UserFactory::emerge([
-            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ])->save();
 
-        event(new Registered($user));
+        // TODO: Log event
 
         Auth::login($user);
 
