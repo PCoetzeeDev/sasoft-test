@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Make;
 
 use Exception;
 use Illuminate\Console\Command;

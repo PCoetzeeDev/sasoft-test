@@ -56,7 +56,10 @@ class User extends BaseEntity implements
         'email_verified_at' => 'datetime',
     ];
 
-    public function delete()
+    /**
+     * @return bool|null
+     */
+    public function delete(): ?bool
     {
         // Scramble email address to preserve uniqueness
         $this->update(['email' => Str::random()]);
