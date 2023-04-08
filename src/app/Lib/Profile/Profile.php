@@ -5,10 +5,11 @@ namespace App\Lib\Profile;
 use App\Base\BaseEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends BaseEntity
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'profiles';
 
