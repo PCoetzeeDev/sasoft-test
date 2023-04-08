@@ -18,7 +18,6 @@ class Profile extends BaseEntity
      * @var array<int, string>
      */
     protected $fillable = [
-        'code',
         'first_name',
         'last_name',
         'company_name',

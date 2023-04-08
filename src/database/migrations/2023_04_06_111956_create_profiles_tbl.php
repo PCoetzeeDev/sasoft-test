@@ -32,7 +32,7 @@ return new class extends Migration
 
         Schema::create(self::TBL_PROFILES, function (Blueprint $table) use ($guestProfileTypeId) {
             $table->bigIncrements('id');
-            $table->uuid('code')->index();
+            $table->uuid()->index();
             $table->text('first_name')->nullable();
             $table->text('last_name')->nullable();
             $table->text('company_name')->nullable();
