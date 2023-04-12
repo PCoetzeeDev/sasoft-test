@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import fs from 'fs';
 
-const host = 'findme-energy-app';
+const host = 'sasoft-test-app';
 
 export default defineConfig({
     plugins: [
@@ -17,9 +17,9 @@ export default defineConfig({
     server: {
         host,
         hmr: { host },
-        https: {
-            key: fs.readFileSync(`/certs/localkey.pem`),
-            cert: fs.readFileSync(`/certs/localcert.pem`),
-        },
+        // https: {
+        //     key: fs.readFileSync(`/certs/localkey.pem`),
+        //     cert: fs.readFileSync(`/certs/localcert.pem`),
+        // },
     },
 });
