@@ -1,39 +1,39 @@
 version: "3"
 services:
     # php-fpm
-    findme-energy-app:
+    sasoft-test-app:
         build:
             context: php-fpm/
             dockerfile: php-fpm-debian.dockerfile
             args:
                 - APP_USER=${APP_USER}
-        container_name: findme-energy-app
+        container_name: sasoft-test-app
         restart: unless-stopped
         tty: true
-        working_dir: /usr/share/nginx/findme.local
+        working_dir: /usr/share/nginx/sasofttest.local
         depends_on:
-            - findme-energy-db
-            - findme-energy-redis
-            - findme-energy-mailhog
+            - sasoft-test-db
+            - sasoft-test-redis
+            - sasoft-test-mailhog
         environment:
             SERVICE_NAME: ${APP_SERVICE_NAME}
             SERVICE_TAGS: ${APP_SERVICE_TAGS}
             APP_USER: ${APP_USER}
             SSH_AUTH_SOCK: /ssh-agent
         volumes:
-            - ../src:/usr/share/nginx/findme.local # code
+            - ../src:/usr/share/nginx/sasofttest.local # code
             - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker for ssh access to container
             - ./nginx/certs/:/certs/ # ssl certs
         #     - ./php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
         #   extra_hosts: # extra parameter for xdebug to work on linux/mac
         #     - "host.docker.internal:host-gateway"
         networks:
-            - findme-energy-network
+            - sasoft-test-network
 
     # The Cache
-    findme-energy-redis:
+    sasoft-test-redis:
         image: redis:latest
-        container_name: findme-energy-redis
+        container_name: sasoft-test-redis
         environment:
             SERVICE_NAME: ${CACHE_SERVICE_NAME}
             SERVICE_TAGS: ${CACHE_SERVICE_TAGS}
@@ -42,16 +42,16 @@ services:
         ports:
             - "6379:6379"
         networks:
-            - findme-energy-network
+            - sasoft-test-network
 
     # PostgreSQL Service
-    findme-energy-db:
+    sasoft-test-db:
         image: postgres:latest
-        container_name: findme-energy-db
+        container_name: sasoft-test-db
         restart: unless-stopped
         tty: true
         ports:
-            - "5555:5432"
+            - "5556:5432"
         environment:
             POSTGRES_DB: ${DB_NAME}
             POSTGRES_USER: ${DB_USER}
@@ -64,12 +64,12 @@ services:
 #            - ./postgresql/pg_hba.conf:/var/lib/postgresql/pg_hba.conf # TODO - decide what to do here
 #            - ./postgresql/postgresql.conf:/var/lib/postgresql/postgresql.conf # TODO - decide what to do here
         networks:
-            - findme-energy-network
+            - sasoft-test-network
 
     # Mailhog email catchall
-    findme-energy-mailhog:
+    sasoft-test-mailhog:
         image: mailhog/mailhog:latest
-        container_name: findme-energy-mailhog
+        container_name: sasoft-test-mailhog
         restart: unless-stopped
         tty: true
         logging:
@@ -78,16 +78,16 @@ services:
             - "8025:8025"
             - "1025:1025"
         networks:
-            - findme-energy-network
+            - sasoft-test-network
 
     # Nginx Service
-    findme-energy-nginx:
+    sasoft-test-nginx:
         image: nginx:latest
-        container_name: findme-energy-nginx
+        container_name: sasoft-test-nginx
         restart: unless-stopped
         tty: true
         depends_on:
-            - findme-energy-app
+            - sasoft-test-app
         environment:
             SERVICE_NAME: ${WEB_SERVICE_NAME}
             SERVICE_TAGS: ${WEB_SERVICE_TAGS}
@@ -95,14 +95,14 @@ services:
             - "80:80"
             - "443:443"
         volumes:
-            - ../src:/usr/share/nginx/findme.local # code
+            - ../src:/usr/share/nginx/sasofttest.local # code
             - ./nginx/conf.d/:/etc/nginx/conf.d/ # site conf
             - ./nginx/certs/:/etc/nginx/certs/ # ssl certs
         networks:
-            - findme-energy-network
+            - sasoft-test-network
 
 
 # Docker Networks
 networks:
-    findme-energy-network:
+    sasoft-test-network:
         driver: bridge

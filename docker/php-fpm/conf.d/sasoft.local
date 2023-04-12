@@ -1,5 +1,5 @@
-[findme.local]
-listen = /run/lock/findme.local.sock
+[sasoft.local]
+listen = /run/lock/sasoft.local.sock
 ;user = www-data
 ;group = www-data
 pm = dynamic

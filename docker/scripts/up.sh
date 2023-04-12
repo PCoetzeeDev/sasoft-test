@@ -5,7 +5,7 @@ set -euo pipefail
 trap cleanup INT
 
 COMPOSE_FILE="./../docker/docker-compose.yml"
-GREP_REGEX="findme-energy-app|findme-energy-nginx"
+GREP_REGEX="sasoft-test-app|sasoft-test-nginx"
 
 function cleanup() {
   echo "Cleaning up docker..."
