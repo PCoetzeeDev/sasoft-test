@@ -67,7 +67,7 @@ ENV APP_USER $APP_USER
 RUN groupadd -g 1000 "$APP_USER" \
     && useradd -u 1000 -ms /bin/bash -g "${APP_USER}" "${APP_USER}"
 
-# Change current user to www
+# Change current user to local user
 USER ${APP_USER}
 
 # Expose port 9000 and start php-fpm server
