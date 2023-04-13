@@ -9,6 +9,10 @@ class SkillRating extends ValueObject
 
     protected $table = 'skill_ratings';
 
+    const SLUG_RATING_BEGINNER = 'beginner';
+    const SLUG_RATING_INTERMEDIATE = 'intermediate';
+    const SLUG_RATING_EXPERT = 'expert';
+
     /**
      * The attributes that are mass assignable.
      *

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Domains\Employee\Unit;
+namespace Tests\Domains\Employee\Feature;
 
 use App\Lib\Employee\EmployeeAddressFactory;
 use App\Lib\Employee\EmployeeAddressRepository;

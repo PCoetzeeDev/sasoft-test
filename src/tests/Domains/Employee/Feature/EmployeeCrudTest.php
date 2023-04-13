@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Domains\Employee\Unit;
+namespace Tests\Domains\Employee\Feature;
 
 use App\Lib\Employee\EmployeeFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,7 +21,7 @@ class EmployeeCrudTest extends TestCase
     /**
      * @return void
      */
-    public function test_createUpdateDeleteEmployeeEntity() : void
+    public function test_createUpdateEmployeeAddress() : void
     {
         $employee = EmployeeFactory::emerge()->save();
         $this->assertTrue($employee->exists);

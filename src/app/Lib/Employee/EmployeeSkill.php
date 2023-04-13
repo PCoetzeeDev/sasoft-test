@@ -3,6 +3,7 @@
 namespace App\Lib\Employee;
 
 use App\Base\BaseEntity;
+use App\Base\ValueObjects\ValueObject;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EmployeeSkill extends BaseEntity
@@ -36,6 +37,16 @@ class EmployeeSkill extends BaseEntity
      */
     protected $casts = [];
 
+    /**
+     * @param ValueObject $skillRating
+     * @return $this
+     */
+    public function setSkillRating(ValueObject $skillRating) : self
+    {
+        $this->skill_rating()->associate($skillRating);
+
+        return $this;
+    }
 
     /**
      * @return SkillRating
@@ -43,6 +54,17 @@ class EmployeeSkill extends BaseEntity
     public function getSkillRating() : SkillRating
     {
         return $this->skill_rating ?? new SkillRating();
+    }
+
+    /**
+     * @param Employee $employee
+     * @return $this
+     */
+    public function setEmployee(Employee $employee) : self
+    {
+        $this->employee()->associate($employee);
+
+        return $this;
     }
 
     /**
