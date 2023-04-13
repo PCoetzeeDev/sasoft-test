@@ -7,7 +7,6 @@ use App\Base\HasUniqueCodeTrait;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,7 +53,7 @@ class Employee extends BaseEntity
      * @return bool|null
      * @throws Exception
      */
-    public function delete()
+    public function delete(): ?bool
     {
         $this->email_address = Hash::make(random_bytes(100));
         $this->contact_number = Hash::make(random_bytes(100));
@@ -71,11 +70,16 @@ class Employee extends BaseEntity
     {
         try {
             DB::beginTransaction();
+
+            // Using the repo here instead of the relationship as the relationship is "faked" to be one-to-one
+            // This function here makes sure that there is only ever one non-soft deleted instance, the relationship doesn't need to know otherwise
             foreach (EmployeeAddressRepository::getAllAddressesForEmployee($this) as $address) {
                 $address->delete();
             }
             $newAddress->setEmployee($this);
             $newAddress->save();
+
+            DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
             throw $exception;

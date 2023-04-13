@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
      */
     public function store(UserRegisterRequest $request): RedirectResponse
     {
-        $user = UserFactory::emerge([
+        $user = UserFactory::instantiate([
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ])->save();

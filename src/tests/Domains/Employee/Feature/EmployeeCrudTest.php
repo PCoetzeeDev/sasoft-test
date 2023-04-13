@@ -2,6 +2,8 @@
 
 namespace Tests\Domains\Employee\Feature;
 
+use App\Exceptions\InstantiateAttemptInWrongEnvException;
+use App\Exceptions\UnknownEnvironmentException;
 use App\Lib\Employee\EmployeeFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -20,10 +22,12 @@ class EmployeeCrudTest extends TestCase
 
     /**
      * @return void
+     * @throws InstantiateAttemptInWrongEnvException
+     * @throws UnknownEnvironmentException
      */
     public function test_createUpdateEmployeeAddress() : void
     {
-        $employee = EmployeeFactory::emerge()->save();
+        $employee = EmployeeFactory::instantiate()->save();
         $this->assertTrue($employee->exists);
 
         $employeeBackup = clone $employee;

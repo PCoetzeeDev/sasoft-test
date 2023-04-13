@@ -2,6 +2,8 @@
 
 namespace Tests\Domains\Employee\Feature;
 
+use App\Exceptions\InstantiateAttemptInWrongEnvException;
+use App\Exceptions\UnknownEnvironmentException;
 use App\Lib\Employee\EmployeeAddressFactory;
 use App\Lib\Employee\EmployeeAddressRepository;
 use App\Lib\Employee\EmployeeFactory;
@@ -22,14 +24,16 @@ class EmployeeAddressCrudTest extends TestCase
 
     /**
      * @return void
+     * @throws InstantiateAttemptInWrongEnvException
+     * @throws UnknownEnvironmentException
      */
     public function test_AddressEntity() : void
     {
         // Test first creation:
-        $employee = EmployeeFactory::emerge()->save();
+        $employee = EmployeeFactory::instantiate()->save();
         $this->assertTrue($employee->exists);
 
-        $address = EmployeeAddressFactory::emerge();
+        $address = EmployeeAddressFactory::instantiate();
         $address->setEmployee($employee);
         $this->assertFalse($address->exists);
 
@@ -43,7 +47,7 @@ class EmployeeAddressCrudTest extends TestCase
         $this->assertTrue($addresses[0]->is($employee->getAddress()));
 
         // Test updating:
-        $address = EmployeeAddressFactory::emerge();
+        $address = EmployeeAddressFactory::instantiate();
         $address->setEmployee($employee);
         $employee->saveAddress($address);
 

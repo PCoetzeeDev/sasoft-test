@@ -2,6 +2,8 @@
 
 namespace Tests\Domains\Employee\Feature;
 
+use App\Exceptions\InstantiateAttemptInWrongEnvException;
+use App\Exceptions\UnknownEnvironmentException;
 use App\Lib\Employee\EmployeeFactory;
 use App\Lib\Employee\EmployeeSkillFactory;
 use App\Lib\Employee\SkillRating;
@@ -22,16 +24,18 @@ class EmployeeSkillCrudTest extends TestCase
 
     /**
      * @return void
+     * @throws InstantiateAttemptInWrongEnvException
+     * @throws UnknownEnvironmentException
      */
     public function test_createUpdateDeleteEmployeeSkills() : void
     {
-        $employee = EmployeeFactory::emerge()->save();
+        $employee = EmployeeFactory::instantiate()->save();
         $this->assertTrue($employee->exists);
 
         $rating = SkillRating::getBySlug(SkillRating::SLUG_RATING_BEGINNER);
         $this->assertModelExists($rating);
 
-        $skill = EmployeeSkillFactory::emerge()
+        $skill = EmployeeSkillFactory::instantiate()
             ->setSkillRating($rating)
             ->setEmployee($employee)
             ->save();
