@@ -68,7 +68,7 @@ class MakeValueObjectCommand extends Command
 
             File::ensureDirectoryExists($domainFullPath);
 
-            $fileContent = file_get_contents(__DIR__ . '/../../../stubs/' . self::STUB);
+            $fileContent = file_get_contents(__DIR__ . '/../../../../stubs/' . self::STUB);
             foreach ($this->getStubVariables() as $variable => $replacement) {
                 $fileContent = str_replace('{{ '.$variable.' }}' , $replacement, $fileContent);
             }

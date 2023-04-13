@@ -72,7 +72,7 @@ class MakeEntityCommand extends Command
 
             File::ensureDirectoryExists($domainFullPath);
 
-            $fileContent = file_get_contents(__DIR__ . '/../../../stubs/' . self::STUB);
+            $fileContent = file_get_contents(__DIR__ . '/../../../../stubs/' . self::STUB);
             foreach ($this->getStubVariables(self::STUB) as $variable => $replacement) {
                 $fileContent = str_replace('{{ '.$variable.' }}' , $replacement, $fileContent);
             }
@@ -84,7 +84,7 @@ class MakeEntityCommand extends Command
             }
 
             if ($this->createFactory === true) {
-                $fileContent = file_get_contents(__DIR__ . '/../../../stubs/' . self::FACTORY_STUB);
+                $fileContent = file_get_contents(__DIR__ . '/../../../../stubs/' . self::FACTORY_STUB);
                 foreach ($this->getStubVariables(self::FACTORY_STUB) as $variable => $replacement) {
                     $fileContent = str_replace('{{ '.$variable.' }}' , $replacement, $fileContent);
                 }
