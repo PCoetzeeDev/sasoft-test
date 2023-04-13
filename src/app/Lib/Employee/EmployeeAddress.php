@@ -3,12 +3,14 @@
 namespace App\Lib\Employee;
 
 use App\Base\BaseEntity;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class EmployeeSkill extends BaseEntity
+class EmployeeAddress extends BaseEntity
 {
+    use HasFactory;
 
-    protected $table = 'employee_skills';
+    protected $table = 'employee_addresses';
 
     /**
      * The attributes that are mass assignable.
@@ -16,10 +18,11 @@ class EmployeeSkill extends BaseEntity
      * @var array<int, string>
      */
     protected $fillable = [
-        'skill_name',
-        'years_experience',
+        'street',
+        'city',
+        'postal_code',
+        'country',
         'employee_id',
-        'skill_rating_id',
     ];
 
     /**
@@ -36,29 +39,12 @@ class EmployeeSkill extends BaseEntity
      */
     protected $casts = [];
 
-
-    /**
-     * @return SkillRating
-     */
-    public function getSkillRating() : SkillRating
-    {
-        return $this->skill_rating ?? new SkillRating();
-    }
-
     /**
      * @return Employee
      */
     public function getEmployee() : Employee
     {
         return $this->employee ?? new Employee();
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    protected function skill_rating() : BelongsTo
-    {
-        return $this->belongsTo(SkillRating::class);
     }
 
     /**

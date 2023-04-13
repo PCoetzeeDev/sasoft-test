@@ -17,7 +17,11 @@ class EmployeeFactory extends BaseFactory
     public function definition(): array
     {
         return [
-            //
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'contact_number' => fake()->phoneNumber(),
+            'email_address' => fake()->safeEmail(),
+            'date_of_birth' => fake()->dateTime(),
         ];
     }
 }
