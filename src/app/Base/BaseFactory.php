@@ -15,7 +15,7 @@ abstract class BaseFactory extends Factory
      * @throws InstantiateAttemptInWrongEnvException
      * @throws UnknownEnvironmentException
      */
-    public static function instantiate(array $data = []) : BaseEntity
+    public static function instantiate(array $data = [], bool $seeding = false) : BaseEntity
     {
         $factory = new static();
         $modelName = Str::replaceLast('Factory', '', get_class($factory));
@@ -23,9 +23,16 @@ abstract class BaseFactory extends Factory
             return $modelName;
         });
 
-        switch (app()->environment()) {
+        $env = app()->environment();
+        if ($seeding === true) {
+            $env = 'seeding';
+        }
+
+        switch ($env) {
             case 'testing':
+            case 'seeding':
                 $data = empty($data) ? $factory->makeOne()->toArray() : $data;
+
                 return $factory->makeOne($data);
 
             case 'production':
@@ -33,6 +40,7 @@ abstract class BaseFactory extends Factory
                 if (empty($data)) {
                     throw new InstantiateAttemptInWrongEnvException();
                 }
+
                 return new $modelName; // non-testing models should always start out empty
 
             default:
