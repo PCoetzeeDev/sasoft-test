@@ -9,6 +9,25 @@ use App\Base\BaseFactory;
  */
 class EmployeeSkillFactory extends BaseFactory
 {
+    const SKILL_NAMES = [
+        'PHP',
+        'Vue',
+        'React',
+        'Git',
+        'Rust',
+        'Python',
+        'Elixir',
+        'C#',
+    ];
+
+    const YEARS_EXPERIENCE = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5+',
+    ];
+
     /**
      * Define the model's default state.
      *
@@ -16,28 +35,9 @@ class EmployeeSkillFactory extends BaseFactory
      */
     public function definition(): array
     {
-        $skillNames = [
-            'PHP',
-            'Vue',
-            'React',
-            'Git',
-            'Rust',
-            'Python',
-            'Elixir',
-            'C#',
-        ];
-
-        $yearsExperienceOptions = [
-            '1',
-            '2',
-            '3',
-            '4',
-            '5+',
-        ];
-
         return [
-            'skill_name' => fake()->randomElement($skillNames),
-            'years_experience' => fake()->randomElement($yearsExperienceOptions),
+            'skill_name' => fake()->randomElement(static::SKILL_NAMES),
+            'years_experience' => fake()->randomElement(static::YEARS_EXPERIENCE),
         ];
     }
 }
