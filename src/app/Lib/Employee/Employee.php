@@ -3,14 +3,18 @@
 namespace App\Lib\Employee;
 
 use App\Base\BaseEntity;
+use App\Base\HasUniqueCodeTrait;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Hash;
 
 class Employee extends BaseEntity
 {
-    use HasFactory;
+    use HasFactory, HasUniqueCodeTrait, SoftDeletes;
 
     protected $table = 'employees';
 
@@ -43,6 +47,18 @@ class Employee extends BaseEntity
     protected $casts = [
         'date_of_birth' => 'date',
     ];
+
+    /**
+     * @return bool|null
+     * @throws Exception
+     */
+    public function delete()
+    {
+        $this->email_address = Hash::make(random_bytes(100));
+        $this->contact_number = Hash::make(random_bytes(100));
+
+        return parent::delete();
+    }
 
     /**
      * @return EmployeeAddress

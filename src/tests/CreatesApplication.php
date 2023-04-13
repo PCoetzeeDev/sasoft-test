@@ -15,7 +15,11 @@ trait CreatesApplication
     {
         $app = require __DIR__.'/../bootstrap/app.php';
 
-        $app->make(Kernel::class)->bootstrap();
+        try {
+            $app->make(Kernel::class)->bootstrap();
+        } catch (\Exception $exception) {
+            dd($exception->getTraceAsString());
+        }
 
         return $app;
     }

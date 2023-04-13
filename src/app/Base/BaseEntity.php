@@ -15,13 +15,13 @@ class BaseEntity extends Model
     public function save(array $options = []) : self
     {
         try {
-            if (array_key_exists('code', $this->attributes) || array_key_exists('code', $options)) {
+            if ($this->hasUniqueCode() && !$this->uniqueCodeIsSet()) {
                 $code = create_unique_code_for_table($this->getTable());
-                if (empty($options)) {
-                    $this->code = $code;
-                } else {
+                $this->code = $code;
+
+                if (!empty($options)) {
                     $options['code'] = $code;
-                }
+                };
             }
         } catch (Exception $exception) {
             Log::error('Failed to set code on entity before saving', [
@@ -32,10 +32,26 @@ class BaseEntity extends Model
         }
 
         if (parent::save($options)) {
-            return $this;
+            return $this->refresh();
         }
-        $className = get_class($this);
 
+        $className = get_class($this);
         return new $className;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasUniqueCode() : bool
+    {
+        return in_array(HasUniqueCodeTrait::class, class_uses_recursive($this));
+    }
+
+    /**
+     * @return bool
+     */
+    public function uniqueCodeIsSet() : bool
+    {
+        return $this->getCode() !== null;
     }
 }
