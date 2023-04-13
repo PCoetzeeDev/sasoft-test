@@ -32,7 +32,7 @@ class BaseEntity extends Model
         }
 
         if (parent::save($options)) {
-            return $this->refresh();
+            return $this;
         }
 
         $className = get_class($this);

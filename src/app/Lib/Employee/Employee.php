@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class Employee extends BaseEntity
@@ -61,6 +63,28 @@ class Employee extends BaseEntity
     }
 
     /**
+     * @param EmployeeAddress $newAddress
+     * @return $this
+     * @throws Exception
+     */
+    public function saveAddress(EmployeeAddress $newAddress) : self
+    {
+        try {
+            DB::beginTransaction();
+            foreach (EmployeeAddressRepository::getAllAddressesForEmployee($this) as $address) {
+                $address->delete();
+            }
+            $newAddress->setEmployee($this);
+            $newAddress->save();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
+
+        return $this->refresh();
+    }
+
+    /**
      * @return EmployeeAddress
      */
     public function getAddress() : EmployeeAddress
@@ -77,11 +101,11 @@ class Employee extends BaseEntity
     }
 
     /**
-     * @return BelongsTo
+     * @return HasOne
      */
-    protected function address() : BelongsTo
+    public function address() : HasOne
     {
-        return $this->belongsTo(EmployeeAddress::class);
+        return $this->hasOne(EmployeeAddress::class);
     }
 
     /**

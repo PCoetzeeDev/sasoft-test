@@ -20,6 +20,7 @@
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
+        "pestphp/pest": "^2.4",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0"
     },
@@ -66,8 +67,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "pestphp/pest-plugin": true
         }
     },
     "minimum-stability": "stable",

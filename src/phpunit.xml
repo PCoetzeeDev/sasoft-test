@@ -5,8 +5,8 @@
          colors="true"
 >
     <testsuites>
-        <testsuite name="Employee">
-            <directory suffix="Test.php">./tests/Domains/Employee</directory>
+        <testsuite name="EmployeeUnit">
+            <directory suffix="Test.php">./tests/Domains/Employee/Unit</directory>
         </testsuite>
     </testsuites>
     <coverage>
@@ -18,6 +18,7 @@
         <env name="APP_ENV" value="testing"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_DRIVER" value="array"/>
+        <env name="APP_BASE_PATH" value="/usr/share/nginx/sasofttest.local" force="true"/>
 <!--        <env name="DB_CONNECTION" value="pgsql"/>-->
 <!--        <env name="DB_DATABASE" value=""/>-->
         <env name="MAIL_MAILER" value="array"/>

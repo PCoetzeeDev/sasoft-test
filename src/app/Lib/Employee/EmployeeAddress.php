@@ -5,10 +5,11 @@ namespace App\Lib\Employee;
 use App\Base\BaseEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EmployeeAddress extends BaseEntity
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'employee_addresses';
 
@@ -45,6 +46,17 @@ class EmployeeAddress extends BaseEntity
     public function getEmployee() : Employee
     {
         return $this->employee ?? new Employee();
+    }
+
+    /**
+     * @param Employee $employee
+     * @return $this
+     */
+    public function setEmployee(Employee $employee) : self
+    {
+        $this->employee()->associate($employee);
+
+        return $this;
     }
 
     /**
