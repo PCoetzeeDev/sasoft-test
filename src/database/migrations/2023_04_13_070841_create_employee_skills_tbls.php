@@ -35,7 +35,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_skills_tbls');
+        Schema::dropIfExists('employee_skills');
         Schema::dropIfExists('skill_ratings');
     }
 };

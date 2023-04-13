@@ -20,6 +20,7 @@ class Employee extends BaseEntity
      * @var array<int, string>
      */
     protected $fillable = [
+        'code',
         'first_name',
         'last_name',
         'contact_number',
@@ -40,7 +41,7 @@ class Employee extends BaseEntity
      * @var array<string, string>
      */
     protected $casts = [
-        'date_of_birth' => 'timestamp',
+        'date_of_birth' => 'date',
     ];
 
     /**

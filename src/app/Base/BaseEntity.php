@@ -15,8 +15,13 @@ class BaseEntity extends Model
     public function save(array $options = []) : self
     {
         try {
-            if (isset($this->code) || isset($options['code'])) {
-                $options['code'] = create_unique_code_for_table($this->getTable());
+            if (array_key_exists('code', $this->attributes) || array_key_exists('code', $options)) {
+                $code = create_unique_code_for_table($this->getTable());
+                if (empty($options)) {
+                    $this->code = $code;
+                } else {
+                    $options['code'] = $code;
+                }
             }
         } catch (Exception $exception) {
             Log::error('Failed to set code on entity before saving', [
