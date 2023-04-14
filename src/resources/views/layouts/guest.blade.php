@@ -27,11 +27,6 @@
         </div>
 
         @livewireScripts
-
-{{--        <script>--}}
-{{--Livewire.on('createEmployeeModal', function () {--}}
-{{--    console.log('foo');--}}
-{{--})--}}
-{{--</script>--}}
+        @livewire('livewire-ui-modal')
     </body>
 </html>
