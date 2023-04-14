@@ -12,8 +12,8 @@
                 <option value="contact_number">Contact Number</option>
             </select>
         </div>
-        <div class="flex-grow">
-            <components:secondary-button />
+        <div class="flex-grow-1 ml-4">
+            @include('livewire.employees.components.create-employee-button')
         </div>
     </div>
 
