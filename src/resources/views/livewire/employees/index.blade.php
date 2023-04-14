@@ -12,6 +12,9 @@
                 <option value="contact_number">Contact Number</option>
             </select>
         </div>
+        <div class="flex-grow">
+            <components:secondary-button />
+        </div>
     </div>
 
     <div class="mt-4">

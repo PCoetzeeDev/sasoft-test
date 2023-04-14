@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Employees;
 
-use App\Lib\Employee\Employee;
 use App\Lib\Employee\EmployeeRepository;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,7 +16,18 @@ class Index extends Component
     public $search = '';
     public $filterOn = '';
 
-    public function render()
+    /**
+     * @return void
+     */
+    public function updatingSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    /**
+     * @return View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+     */
+    public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.employees.index', [
             'employees' => EmployeeRepository::searchList($this->search, $this->filterOn),
