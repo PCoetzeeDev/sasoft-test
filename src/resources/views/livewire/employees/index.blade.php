@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 @foreach($employees as $key => $employee)
-                    <tr>
+                    <tr class="sasoft-row">
                         <td class="border px-4 py-2">{{ $employee->first_name }}</td>
                         <td class="border px-4 py-2">{{ $employee->last_name }}</td>
                         <td class="border px-4 py-2">{{ $employee->contact_number }}</td>

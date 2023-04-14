@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.sasoft-background {
+    background-color: #130413;
+}
+
+.sasoft-row {
+    background-color: #757273;
+}
+
+.sasoft-text {
+    color: #ded7db;
+}
