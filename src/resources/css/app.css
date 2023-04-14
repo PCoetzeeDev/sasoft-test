@@ -5,6 +5,9 @@
 .sasoft-background {
     background-color: #130413;
 }
+.sasoft-modal-background {
+    background-color: #242335;
+}
 
 .sasoft-row {
     background-color: #757273;
@@ -12,4 +15,19 @@
 
 .sasoft-text {
     color: #ded7db;
+}
+
+.sasoft-modal-background .sasoft-secondary-text
+{
+    color: #7233a2;
+}
+
+.sasoft-modal-background label
+{
+    color: #ded7db;
+}
+
+.sasoft-modal-background input
+{
+    background-color: #767070;
 }
