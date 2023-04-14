@@ -1,3 +1,3 @@
 <x-guest-layout>
-    <livewire:employee-list />
+    <livewire:employees.index />
 </x-guest-layout>
