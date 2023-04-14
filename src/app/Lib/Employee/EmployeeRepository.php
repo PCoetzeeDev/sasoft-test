@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Collection;
 class EmployeeRepository
 {
     /**
-     * @param array $filterFields
-     * @return Collection
+     * @param string $code
+     * @return Employee
      */
-    public static function searchWithFilter(array $filterFields = []) : Collection
+    public static function findByCode(string $code) : Employee
     {
-        $query = Employee::query()->get();
-        return $query;
-//        if (!empty($filterFields)) {
-//            $query->where()
-//        }
+        return Employee::query()
+            ->where('code', '=', $code)
+            ->limit(1)
+            ->get()
+            ->first() ?? new Employee();
     }
 
     /**
