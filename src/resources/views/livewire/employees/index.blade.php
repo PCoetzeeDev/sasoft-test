@@ -1,8 +1,6 @@
 <div>
     <div class="flex items-center">
-        <div class="mr-4">
-            <span class="font-medium text-gray-600">Foo</span>
-        </div>
+        <livewire:employees.components.count />
         <div class="flex-grow">
             <input type="text" wire:model="search" class="w-full px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Search...">
         </div>
@@ -26,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($employees as $employee)
+                @foreach($employees as $key => $employee)
                     <tr>
                         <td class="border px-4 py-2">{{ $employee->first_name }}</td>
                         <td class="border px-4 py-2">{{ $employee->last_name }}</td>
