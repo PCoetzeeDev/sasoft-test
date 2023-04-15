@@ -1,4 +1,9 @@
 <div>
+    @if (flash()->message)
+        <div class="{{ flash()->class }}" role="alert">
+             <span class="font-medium">{{ flash()->message }}</span>
+        </div>
+    @endif
     <div class="flex items-center">
         <livewire:employees.components.count />
         <div class="flex-grow">

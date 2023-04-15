@@ -17,14 +17,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('employees');
-});
+})->name('index');
 
 Route::name('employees')->prefix('/employees')->group(function () {
-    Route::get('/create', [EmployeeController::class, 'create'])->name('.create');
-    Route::post('/store', [EmployeeController::class, 'store'])->name('.store');
-    Route::get('/edit/{employeeCode}', [EmployeeController::class, 'edit'])->name('.edit');
-    Route::post('/update', [EmployeeController::class, 'update'])->name('.update');
-    Route::get('/delete/{employeeCode}', [EmployeeController::class, 'delete'])->name('.delete');
+    Route::get('/create', [EmployeeController::class, 'create'])
+        ->name('.create');
+    Route::post('/store', [EmployeeController::class, 'store'])
+        ->name('.store');
+    Route::get('/edit/{employeeCode}', [EmployeeController::class, 'edit'])
+        ->middleware([\App\Http\Middleware\EmployeeCodeExists::class])
+        ->name('.edit');
+    Route::post('/update', [EmployeeController::class, 'update'])
+        ->name('.update');
+    Route::get('/delete/{employeeCode}', [EmployeeController::class, 'delete'])
+        ->middleware(\App\Http\Middleware\EmployeeCodeExists::class)
+        ->name('.delete');
 });
 
 Route::get('/dashboard', function () {

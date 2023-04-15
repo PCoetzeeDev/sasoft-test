@@ -17,6 +17,18 @@
     color: #ded7db;
 }
 
+.sasoft-error {
+    color: rgb(255, 255, 255);
+    background-color: rgba(164, 95, 98, 0.56);
+    border: thin solid rgba(198, 96, 96, 0.56);
+}
+
+.sasoft-success {
+    color: rgb(255, 255, 255);
+    background-color: rgba(173, 233, 142, 0.56);
+    border: thin solid rgba(104, 209, 104, 0.56);
+}
+
 .sasoft-modal-background .sasoft-secondary-text
 {
     color: #7233a2;

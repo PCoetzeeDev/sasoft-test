@@ -9,6 +9,7 @@
         </label>
         <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
                id="txtStreetAddress" type="text" name="address[street]" value="{{ $address->street ?? null }}">
+        @include('components.show-input-error', ['id' => 'address.street'])
     </div>
 </div>
 
@@ -19,6 +20,7 @@
         </label>
         <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
                id="txtCity" type="text" name="address[city]" value="{{ $address->city ?? null }}">
+        @include('components.show-input-error', ['id' => 'address.city'])
     </div>
     <div class="w-1/3 px-1 mb-2 md:mb-1 sm:mb-1">
         <label class="block tracking-wide text-xs font-bold mb-2" for="txtPostalCode">
@@ -26,6 +28,7 @@
         </label>
         <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
                id="txtPostalCode" type="text" name="address[postal_code]" value="{{ $address->postal_code ?? null }}">
+        @include('components.show-input-error', ['id' => 'address.postal_code'])
     </div>
     <div class="w-1/3 px-1 mb-2 md:mb-1 sm:mb-1">
         <label class="block tracking-wide text-xs font-bold mb-2" for="txtCountry">
@@ -33,5 +36,6 @@
         </label>
         <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
                id="txtCountry" type="text" name="address[country]" value="{{ $address->country ?? null }}">
+        @include('components.show-input-error', ['id' => 'address.country'])
     </div>
 </div>

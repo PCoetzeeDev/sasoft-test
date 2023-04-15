@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Lib\Employee\EmployeeAddressFactory;
 use App\Lib\Employee\EmployeeFactory;
 use App\Lib\Employee\EmployeeRepository;
@@ -9,8 +11,8 @@ use App\Lib\Employee\EmployeeSkill;
 use App\Lib\Employee\EmployeeSkillFactory;
 use App\Lib\Employee\SkillRating;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class EmployeeController extends Controller
@@ -27,12 +29,12 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StoreEmployeeRequest $request
      * @return RedirectResponse
      * @throws \App\Exceptions\InstantiateAttemptInWrongEnvException
      * @throws \App\Exceptions\UnknownEnvironmentException
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -48,10 +50,16 @@ class EmployeeController extends Controller
                 ->saveSkills($skills);
 
             DB::commit();
+
+            flash('Employee successfully created',
+                ['p-4', 'mb-4', 'text-sm', 'rounded-lg', 'sasoft-success']);
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            throw $exception;
+            Log::error($exception->getMessage(), $exception->getTrace());
+
+            flash('Unable to create employee, see errors below',
+                ['p-4', 'mb-4', 'text-sm', 'rounded-lg', 'sasoft-error']);
         }
 
         return redirect()->route('employees.edit', ['employeeCode' => $employee->code]);
@@ -74,12 +82,12 @@ class EmployeeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param UpdateEmployeeRequest $request
      * @return RedirectResponse
      * @throws \App\Exceptions\InstantiateAttemptInWrongEnvException
      * @throws \App\Exceptions\UnknownEnvironmentException
      */
-    public function update(Request $request)
+    public function update(UpdateEmployeeRequest $request)
     {
         $employee = EmployeeRepository::findByCode($request->input('employee_code'));
         $address = EmployeeAddressFactory::instantiate($request->input('address'));
@@ -89,6 +97,9 @@ class EmployeeController extends Controller
             ->saveAddress($address)
             ->saveSkills($skills)
             ->update($request->input('basic'));
+
+        flash('Employee successfully updated',
+                ['p-4', 'mb-4', 'text-sm', 'rounded-lg', 'sasoft-success']);
 
         return redirect()->back();
     }
@@ -100,8 +111,17 @@ class EmployeeController extends Controller
      */
     public function delete(string $employeeCode)
     {
-        $employee = EmployeeRepository::findByCode($employeeCode);
-        $employee->delete();
+        try {
+            $employee = EmployeeRepository::findByCode($employeeCode);
+            $employee->delete();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage(), $exception->getTrace());
+
+            flash('Failed to delete employee',
+                ['p-4', 'mb-4', 'text-sm', 'rounded-lg', 'sasoft-error']);
+        }
+        flash('Employee successfully deleted',
+                ['p-4', 'mb-4', 'text-sm', 'rounded-lg', 'sasoft-success']);
 
         return redirect()->back();
     }

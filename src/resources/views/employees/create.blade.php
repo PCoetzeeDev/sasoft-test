@@ -1,5 +1,10 @@
 <x-guest-layout>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 sasoft-modal-background">
+        @if (flash()->message)
+            <div class="{{ flash()->class }}" role="alert">
+                 <span class="font-medium">{{ flash()->message }}</span>
+            </div>
+        @endif
         <h1 class="mb-2 mt-0 text-5xl font-medium leading-tight text-primary text-center">
             Create Employee
         </h1>
