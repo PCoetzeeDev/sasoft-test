@@ -28,7 +28,7 @@
             </div>
         </div>
     @empty
-        <div class="flex mb-2">
+        <div class="flex mb-2" id="row0">
             <div class="w-full px-1 mb-2">
                 <label class="block text-xs font-bold mb-2" for="txtSkillName0">
                     Skill
@@ -49,7 +49,7 @@
                 {{ Form::select("skills[0][skill_rating]", $skillRatingOptions, null, ['id' => 'txtSkillRating0', 'class' => 'border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-purple-500']) }}
             </div>
             <div class="flex w-1/4 px-1 justify-center items-center">
-                <div class="text-center"><a href="#" onclick="deleteRow();return false;" >&#128465;</a></div>
+                <div class="text-center"><a href="#" onclick="deleteRow('row0');return false;" >&#128465;</a></div>
             </div>
         </div>
     @endforelse
