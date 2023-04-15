@@ -37,7 +37,6 @@ class EmployeeController extends Controller
             'employee' => $employee,
             'skills' => $employee->getSkills(),
             'skillRatingOptions' => SkillRating::getForFormSelectBySlug(),
-            'SkillOptions' => EmployeeSkill::SKILL_NAMES,
             'expOptions' => EmployeeSkill::YEARS_EXPERIENCE,
         ]);
     }
