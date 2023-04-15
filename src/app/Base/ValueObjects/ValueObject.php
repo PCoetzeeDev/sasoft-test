@@ -137,6 +137,14 @@ abstract class ValueObject extends BaseEntity implements IValueObjectInterface
     }
 
     /**
+     * @return array
+     */
+    public static function getForFormSelectBySlug() : array
+    {
+	    return self::query()->where('is_active', '=', true)->orderBy('order')->pluck('name', 'slug')->toArray();
+    }
+
+    /**
      * @return string
      * @throws ValueObjectMissingDataException
      */

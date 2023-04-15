@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Lib\Employee\EmployeeRepository;
+use App\Lib\Employee\EmployeeSkill;
+use App\Lib\Employee\SkillRating;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -13,7 +15,11 @@ class EmployeeController extends Controller
      */
     public function create() : View
     {
-        return view('employees.create');
+        return view('employees.create', [
+            'skillRatingOptions' => SkillRating::getForFormSelectBySlug(),
+            'SkillOptions' => EmployeeSkill::SKILL_NAMES,
+            'expOptions' => EmployeeSkill::YEARS_EXPERIENCE,
+        ]);
     }
 
     public function store(Request $request)
@@ -27,6 +33,10 @@ class EmployeeController extends Controller
 
         return view('employees.edit', [
             'employee' => $employee,
+            'skills' => $employee->getSkills(),
+            'skillRatingOptions' => SkillRating::getForFormSelectBySlug(),
+            'SkillOptions' => EmployeeSkill::SKILL_NAMES,
+            'expOptions' => EmployeeSkill::YEARS_EXPERIENCE,
         ]);
     }
 

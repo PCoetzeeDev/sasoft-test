@@ -5,49 +5,45 @@
     @forelse($skills as $skill)
         <div class="flex mb-2">
             <div class="w-1/3 md:w-1/3 sm:w-1/3 px-1 mb-2">
-                <label class="block tracking-wide text-xs font-bold mb-2" for="txtSkillName">
+                <label class="block tracking-wide text-xs font-bold mb-2" for="{{ 'txtSkillName' . $loop->index }}">
                     Skill
                 </label>
                 <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-                       id="txtSkillName" type="text" name="skills[{{ $loop->index }}]['skill_name']" value="{{ $skill->skill_name }}">
+                       id="{{ 'txtSkillName' . $loop->index }}" type="text" name="skills[{{ $loop->index }}]['skill_name']" value="{{ $skill->skill_name }}">
             </div>
             <div class="w-1/3 px-1 mb-2 md:mb-1 sm:mb-1">
-                <label class="block tracking-wide text-xs font-bold mb-2" for="txtYearsExperience">
+                <label class="block tracking-wide text-xs font-bold mb-2" for="{{ 'txtYearsExperience' . $loop->index }}">
                     Yrs Exp
                 </label>
-                <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-                       id="txtYearsExperience" type="text" name="skills[{{ $loop->index }}]['years_experience']" value="{{ $skill->years_experience }}">
+                {{ Form::select("skills[$loop->index]['years_experience']", $expOptions, $skill->years_experience, ['id' => 'txtYearsExperience' . $loop->index, 'class' => 'w-32 px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium']) }}
             </div>
             <div class="w-1/3 px-1 mb-2 md:mb-1 sm:mb-1">
-                <label class="block tracking-wide text-xs font-bold mb-2" for="txtSkillRating">
+                <label class="block tracking-wide text-xs font-bold mb-2" for="{{ 'txtSkillRating' . $loop->index }}">
                     Seniority Rating
                 </label>
-                <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-                       id="txtSkillRating" type="text" name="skills[{{ $loop->index }}]['skill_rating']" value="{{ $skill->getSkillRating()->getName() }}">
+                {{ Form::select("skills[$loop->index]['skill_rating']", $skillRatingOptions, $skill->getSkillRating()->getSlug(), ['id' => 'txtSkillRating' . $loop->index, 'class' => 'w-32 px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium']) }}
             </div>
         </div>
     @empty
         <div class="flex mb-2">
             <div class="w-1/3 md:w-1/3 sm:w-1/3 px-1 mb-2">
-                <label class="block tracking-wide text-xs font-bold mb-2" for="txtSkillName">
+                <label class="block tracking-wide text-xs font-bold mb-2" for="txtSkillName0">
                     Skill
                 </label>
                 <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-                       id="txtSkillName" type="text" name="skills[0]['skill_name']">
+                       id="txtSkillName0" type="text" name="skills[0]['skill_name']">
             </div>
             <div class="w-1/3 px-1 mb-2 md:mb-1 sm:mb-1">
-                <label class="block tracking-wide text-xs font-bold mb-2" for="txtYearsExperience">
+                <label class="block tracking-wide text-xs font-bold mb-2" for="txtYearsExperience0">
                     Yrs Exp
                 </label>
-                <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-                       id="txtYearsExperience" type="text" name="skills[0]['years_experience']">
+                {{ Form::select("skills[0]['years_experience']", $expOptions, null, ['id' => 'txtYearsExperience0', 'class' => 'w-32 px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium']) }}
             </div>
             <div class="w-1/3 px-1 mb-2 md:mb-1 sm:mb-1">
-                <label class="block tracking-wide text-xs font-bold mb-2" for="txtSkillRating">
+                <label class="block tracking-wide text-xs font-bold mb-2" for="txtSkillRating0">
                     Seniority Rating
                 </label>
-                <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-                       id="txtSkillRating" type="text" name="skills[0]['skill_rating']">
+                {{ Form::select("skills[0]['skill_rating']", $skillRatingOptions, null, ['id' => 'txtSkillRating0', 'class' => 'w-32 px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium']) }}
             </div>
         </div>
     @endforelse

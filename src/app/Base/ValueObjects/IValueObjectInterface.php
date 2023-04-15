@@ -66,4 +66,9 @@ interface IValueObjectInterface
      * @return bool
      */
     public function sameAsAny (Collection $valueObjects) : bool;
+
+    /**
+     * @return array
+     */
+    public static function getForFormSelectBySlug() : array;
 }

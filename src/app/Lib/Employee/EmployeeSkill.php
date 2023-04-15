@@ -8,8 +8,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EmployeeSkill extends BaseEntity
 {
-
     protected $table = 'employee_skills';
+
+    const SKILL_NAMES = [
+        'PHP' => 'PHP',
+        'Vue' => 'Vue',
+        'React' =>'React',
+        'Git' => 'Git',
+        'Rust' => 'Rust',
+        'Python' => 'Python',
+        'Elixir' => 'Elixir',
+        'C#' => 'C#',
+    ];
+
+    const YEARS_EXPERIENCE = [
+        '1' => '1',
+        '2' => '2',
+        '3' => '3',
+        '4' => '4',
+        '5+' => '5+',
+    ];
 
     /**
      * The attributes that are mass assignable.
