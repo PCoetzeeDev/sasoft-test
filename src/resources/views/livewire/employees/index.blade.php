@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div class="mt-4">
+    <div class="mt-4 font-bold">
         <table class="table-auto border-collapse w-full">
             <thead>
                 <tr>
@@ -41,8 +41,14 @@
                         <td class="px-4 py-2">{{ $employee->last_name }}</td>
                         <td class="px-4 py-2">{{ $employee->contact_number }}</td>
                         <td class="rounded-r-full px-4 py-2">
-                            <a href="{{ route('employees.edit', ['employeeCode' => $employee->code]) }}">EDIT</a>
-                            <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}"></a>
+                            <div class="flex w-full justify-center items-center">
+                                <div class="w-1/2 text-center text-2xl" style="padding-right: 10px;">
+                                    <a href="{{ route('employees.edit', ['employeeCode' => $employee->code]) }}">&#9998;</a>
+                                </div>
+                                <div class="w-1/2 text-center text-2xl" style="padding-left: 10px;">
+                                    <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}">&#128465;</a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     <tr class="px-20">
