@@ -8,7 +8,7 @@
             Street Address
         </label>
         <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-               id="txtStreetAddress" type="text" name="street" value="{{ $address->street ?? null }}">
+               id="txtStreetAddress" type="text" name="address[street]" value="{{ $address->street ?? null }}">
     </div>
 </div>
 
@@ -18,20 +18,20 @@
             City
         </label>
         <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-               id="txtCity" type="text" name="city" value="{{ $address->city ?? null }}">
+               id="txtCity" type="text" name="address[city]" value="{{ $address->city ?? null }}">
     </div>
     <div class="w-1/3 px-1 mb-2 md:mb-1 sm:mb-1">
         <label class="block tracking-wide text-xs font-bold mb-2" for="txtPostalCode">
             Postal Code
         </label>
         <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-               id="txtPostalCode" type="text" name="postal_code" value="{{ $address->postal_code ?? null }}">
+               id="txtPostalCode" type="text" name="address[postal_code]" value="{{ $address->postal_code ?? null }}">
     </div>
     <div class="w-1/3 px-1 mb-2 md:mb-1 sm:mb-1">
         <label class="block tracking-wide text-xs font-bold mb-2" for="txtCountry">
             Country
         </label>
         <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500"
-               id="txtCountry" type="text" name="country" value="{{ $address->country ?? null }}">
+               id="txtCountry" type="text" name="address[country]" value="{{ $address->country ?? null }}">
     </div>
 </div>

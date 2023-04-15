@@ -42,7 +42,13 @@ class EmployeeController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
+        $employee = EmployeeRepository::findByCode($request->input('employee_code'));
+
+        $employee->update($request->input('basic'));
+//        $employee->getAddress()->update($request->input('address'));
+
+        return redirect()->back();
     }
 
     public function delete(string $employeeCode)

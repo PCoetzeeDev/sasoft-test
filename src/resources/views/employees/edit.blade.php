@@ -6,6 +6,7 @@
 
         <form action="{{ route('employees.update') }}" method="post" class="w-full">
             {{ csrf_field() }}
+            <input type="hidden" name="employee_code" value="{{ $employee->code }}">
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
