@@ -2,16 +2,13 @@
 
 set -euo pipefail
 
-trap cleanup INT
+COMPOSE_FILE="../docker-compose.yml"
 
-COMPOSE_FILE="./../docker/docker-compose.yml"
-GREP_REGEX="sasoft-test-app|sasoft-test-nginx"
+docker-compose --file $COMPOSE_FILE up --build --detach && \
+docker exec sasoft-test-app composer install && \
+docker exec sasoft-test-app npm install && \
+docker exec sasoft-test-app npm run build
 
-function cleanup() {
-  echo "Cleaning up docker..."
-  docker-compose --file $COMPOSE_FILE down
-  echo "Done,goodbye!"
-  exit 0
-}
-
-docker-compose --file $COMPOSE_FILE up | grep --color=always -E "${GREP_REGEX}"
+echo ""
+echo "Good to go!"
+echo ""
