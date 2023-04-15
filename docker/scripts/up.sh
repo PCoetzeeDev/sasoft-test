@@ -10,5 +10,8 @@ docker exec sasoft-test-app npm install && \
 docker exec sasoft-test-app npm run build
 
 echo ""
-echo "Good to go!"
+echo "Should be ready to rock and roll!"
+echo ""
+echo "!!! Remember to add sasofttest.local to your hosts file !!!"
+echo "Thereafter, you can access the site via your browser at http://sasofttest.local"
 echo ""
