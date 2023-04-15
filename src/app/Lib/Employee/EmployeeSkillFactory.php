@@ -56,6 +56,11 @@ class EmployeeSkillFactory extends BaseFactory
         $skills = new Collection();
 
         foreach ($skillsArr as $skill) {
+            // Skip empties:
+            if ($skill['skill_name'] === null || strlen($skill['skill_name']) < 1) {
+                continue;
+            }
+
             $skills->push(static::instantiate([
                 'employee_id' => $employee->id,
                 'skill_name' => $skill['skill_name'],
