@@ -1,8 +1,8 @@
 <div class="mr-4">
-    <div>
-        <span style="font-weight: bold; font-size: x-large;">Employees:</span>
+    <div class="text-2xl text-white font-bold">
+        Employees
     </div>
-    <div>
-        {{ $totalCount }}
+    <div class="text-sm font-bold">
+        There are {{ $totalCount }} employees
     </div>
 </div>
