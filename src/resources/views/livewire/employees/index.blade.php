@@ -25,38 +25,47 @@
     </div>
 
     <div class="mt-4 font-bold">
-        <table class="table-auto border-collapse w-full">
-            <thead>
-                <tr>
-                    <th class="px-4 py-2">First Name</th>
-                    <th class="px-4 py-2">Last Name</th>
-                    <th class="px-4 py-2">Contact Number</th>
-                    <th class="px-4 py-2">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($employees as $key => $employee)
-                    <tr class="sasoft-row px-6">
-                        <td class="rounded-l-full px-4 py-2">{{ $employee->first_name }}</td>
-                        <td class="px-4 py-2">{{ $employee->last_name }}</td>
-                        <td class="px-4 py-2">{{ $employee->contact_number }}</td>
-                        <td class="rounded-r-full px-4 py-2">
-                            <div class="flex w-full justify-center items-center">
-                                <div class="w-1/2 text-center text-2xl" style="padding-right: 10px;">
-                                    <a href="{{ route('employees.edit', ['employeeCode' => $employee->code]) }}">&#9998;</a>
-                                </div>
-                                <div class="w-1/2 text-center text-2xl" style="padding-left: 10px;">
-                                    <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}">&#128465;</a>
-                                </div>
-                            </div>
-                        </td>
+        @if($employees->isEmpty())
+            <div class="flex-wrap w-full justify-center">
+                <div class="flex w-full justify-center mb-6"><img class="object-fill" src="/icon.jpg"  /></div>
+                <div class="flex w-full justify-center mb-10">There is nothing to see here</div>
+                <div class="flex w-full justify-center mt-10" style="font-weight: normal;">Create a new employee by clicking the</div>
+                <div class="flex w-full justify-center" style="font-weight: normal;"><span class="font-bold">new employee</span>&nbsp;button to get started</div>
+            </div>
+        @else
+            <table class="table-auto border-collapse w-full">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">First Name</th>
+                        <th class="px-4 py-2">Last Name</th>
+                        <th class="px-4 py-2">Contact Number</th>
+                        <th class="px-4 py-2">Actions</th>
                     </tr>
-                    <tr class="px-20">
-                        <td colspan="4">&nbsp;</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($employees as $key => $employee)
+                        <tr class="sasoft-row px-6">
+                            <td class="rounded-l-full px-4 py-2">{{ $employee->first_name }}</td>
+                            <td class="px-4 py-2">{{ $employee->last_name }}</td>
+                            <td class="px-4 py-2">{{ $employee->contact_number }}</td>
+                            <td class="rounded-r-full px-4 py-2">
+                                <div class="flex w-full justify-center items-center">
+                                    <div class="w-1/2 text-center text-2xl" style="padding-right: 10px;">
+                                        <a href="{{ route('employees.edit', ['employeeCode' => $employee->code]) }}">&#9998;</a>
+                                    </div>
+                                    <div class="w-1/2 text-center text-2xl" style="padding-left: 10px;">
+                                        <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}">&#128465;</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="px-20">
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endempty
     </div>
     <div class="mt-4">
         {{ $employees->links() }}

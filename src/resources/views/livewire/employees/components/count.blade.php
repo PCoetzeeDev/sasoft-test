@@ -3,6 +3,11 @@
         Employees
     </div>
     <div class="text-sm font-bold">
-        There are {{ $totalCount }} employees
+        @if($totalCount > 0)
+            There are {{ $totalCount }} employees
+        @else
+            No employees
+        @endif
+
     </div>
 </div>
