@@ -55,7 +55,7 @@
     @endforelse
 </div>
 
-<button type="button" onclick="addRow();" class="inline-flex items-center ml-1 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50">
+<button type="button" onclick="addRow();" class="inline-flex px-4 py-2 sasoft-button">
         + Add New Skill
     </button>
 

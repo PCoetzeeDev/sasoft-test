@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="inline-flex items-center px-4 py-2 mt-4 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50">Save</button>
+            <button type="submit" class="inline-flex px-4 py-2 sasoft-button">Save changes to employee</button>
 
         </form>
     </div>

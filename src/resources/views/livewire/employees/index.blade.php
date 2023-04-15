@@ -18,14 +18,14 @@
             </select>
         </div>
         <div class="flex-grow-1 ml-4">
-            <button  wire:click="createEmployee" type="button" class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150">
-                New Employee
+            <button  wire:click="createEmployee" type="button" class="inline-flex px-4 py-2 sasoft-button">
+                + New Employee
             </button>
         </div>
     </div>
 
     <div class="mt-4">
-        <table class="table-auto w-full">
+        <table class="table-auto border-collapse w-full">
             <thead>
                 <tr>
                     <th class="px-4 py-2">First Name</th>
@@ -36,14 +36,17 @@
             </thead>
             <tbody>
                 @foreach($employees as $key => $employee)
-                    <tr class="sasoft-row">
-                        <td class="border px-4 py-2">{{ $employee->first_name }}</td>
-                        <td class="border px-4 py-2">{{ $employee->last_name }}</td>
-                        <td class="border px-4 py-2">{{ $employee->contact_number }}</td>
-                        <td class="border px-4 py-2">
+                    <tr class="sasoft-row px-6">
+                        <td class="rounded-l-full px-4 py-2">{{ $employee->first_name }}</td>
+                        <td class="px-4 py-2">{{ $employee->last_name }}</td>
+                        <td class="px-4 py-2">{{ $employee->contact_number }}</td>
+                        <td class="rounded-r-full px-4 py-2">
                             <a href="{{ route('employees.edit', ['employeeCode' => $employee->code]) }}">EDIT</a>
-                            <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}">DELETE</a>
+                            <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}"></a>
                         </td>
+                    </tr>
+                    <tr class="px-20">
+                        <td colspan="4">&nbsp;</td>
                     </tr>
                 @endforeach
             </tbody>

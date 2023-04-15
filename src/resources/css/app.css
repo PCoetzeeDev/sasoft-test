@@ -29,6 +29,12 @@
     border: thin solid rgba(104, 209, 104, 0.56);
 }
 
+button.sasoft-button {
+    background-color: rgba(133,65,133,0.56);
+    font-weight: bold;
+    border-radius: 9999px;
+}
+
 .sasoft-modal-background .sasoft-secondary-text
 {
     color: #7233a2;
