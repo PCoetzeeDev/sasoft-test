@@ -7,10 +7,10 @@
     <div class="flex items-center">
         <livewire:employees.components.count />
         <div class="flex-grow">
-            <input type="text" wire:model="search" class="w-full px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Search...">
+            <input type="text" wire:model="search" class="w-full px-4 py-2 rounded-lg shadow focus:border-purple-500 focus:shadow-outline text-white font-bold" placeholder="Search..." style="background-color: #130413; border: solid white;">
         </div>
         <div class="flex-grow-0 ml-4">
-            <select wire:model="filterOn" class="w-32 px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium">
+            <select wire:model="filterOn" class="w-32 px-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-white font-medium" style="background-color: #130413; border: none;">
                 <option value="">Filter By</option>
                 <option value="first_name">First Name</option>
                 <option value="last_name">Last Name</option>
