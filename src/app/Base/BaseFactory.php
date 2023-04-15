@@ -37,11 +37,7 @@ abstract class BaseFactory extends Factory
 
             case 'production':
             case 'local':
-                if (empty($data)) {
-                    throw new InstantiateAttemptInWrongEnvException();
-                }
-
-                return new $modelName; // non-testing models should always start out empty
+                return $factory->makeOne($data);
 
             default:
                 throw new UnknownEnvironmentException(); // this default means this function can only return something or throw and exception

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Lib\Employee\EmployeeAddress;
+use App\Lib\Employee\EmployeeAddressFactory;
 use App\Lib\Employee\EmployeeRepository;
 use App\Lib\Employee\EmployeeSkill;
 use App\Lib\Employee\SkillRating;
@@ -42,11 +44,12 @@ class EmployeeController extends Controller
 
     public function update(Request $request)
     {
-//        dd($request->all());
         $employee = EmployeeRepository::findByCode($request->input('employee_code'));
+        $address = EmployeeAddressFactory::instantiate($request->input('address'));
 
-        $employee->update($request->input('basic'));
-//        $employee->getAddress()->update($request->input('address'));
+        $employee
+            ->saveAddress($address)
+            ->update($request->input('basic'));
 
         return redirect()->back();
     }

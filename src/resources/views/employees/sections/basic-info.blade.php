@@ -38,3 +38,12 @@
                id="txtEmailAddress" type="text" name="basic[email_address]" value="{{ $employee->email_address ?? null }}">
     </div>
 </div>
+
+<div class="flex flex-wrap mb-2">
+    <div class="w-full px-1 mb-2 md:mb-1 sm:mb-1">
+        <label class="block tracking-wide text-xs font-bold mb-2" for="txtEmailAddress">
+            Date of Birth
+        </label>
+        {{ Form::date('basic[date_of_birth]', $employee->date_of_birth ?? now(), ['class' => 'appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500']) }}
+    </div>
+</div>

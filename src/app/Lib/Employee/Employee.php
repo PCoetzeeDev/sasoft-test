@@ -7,7 +7,6 @@ use App\Base\HasUniqueCodeTrait;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -69,6 +68,10 @@ class Employee extends BaseEntity
      */
     public function saveAddress(EmployeeAddress $newAddress) : self
     {
+        if ($this->getAddress()->exists && $newAddress->is($this->getAddress())) {
+            return $this;
+        }
+
         try {
             DB::beginTransaction();
 
