@@ -11,7 +11,7 @@
                 <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-purple-500"
                        id="{{ 'txtSkillName' . $loop->index }}" type="text" name="skills[{{ $loop->index }}][skill_name]" value="{{ $skill->skill_name }}">
             </div>
-            <div class="w-1/4 px-1 mb-2 md:mb-1 sm:mb-1">
+            <div class="w-1/4 px-1 mb-2 md:mb-1 sm:mb-1 text-center">
                 <label class="block text-xs font-bold mb-2" for="{{ 'txtYearsExperience' . $loop->index }}">
                     Yrs Exp
                 </label>
@@ -36,7 +36,7 @@
                 <input class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-purple-500"
                        id="txtSkillName0" type="text" name="skills[0][skill_name]">
             </div>
-            <div class="w-1/4 px-1 mb-2 md:mb-1 sm:mb-1">
+            <div class="w-1/4 px-1 mb-2 md:mb-1 sm:mb-1 text-center">
                 <label class="block text-xs font-bold mb-2" for="txtYearsExperience0">
                     Yrs Exp
                 </label>
