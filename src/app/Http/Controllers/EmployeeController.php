@@ -34,4 +34,9 @@ class EmployeeController extends Controller
     {
         dd($request->all());
     }
+
+    public function delete(string $employeeCode)
+    {
+        dd(__METHOD__);
+    }
 }

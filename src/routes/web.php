@@ -24,6 +24,7 @@ Route::name('employees')->prefix('/employees')->group(function () {
     Route::post('/store', [EmployeeController::class, 'store'])->name('.store');
     Route::get('/edit/{employeeCode}', [EmployeeController::class, 'edit'])->name('.edit');
     Route::post('/update', [EmployeeController::class, 'update'])->name('.update');
+    Route::get('/delete/{employeeCode}', [EmployeeController::class, 'delete'])->name('.delete');
 });
 
 Route::get('/dashboard', function () {

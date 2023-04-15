@@ -26,6 +26,7 @@
                     <th class="px-4 py-2">First Name</th>
                     <th class="px-4 py-2">Last Name</th>
                     <th class="px-4 py-2">Contact Number</th>
+                    <th class="px-4 py-2">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,10 @@
                         <td class="border px-4 py-2">{{ $employee->first_name }}</td>
                         <td class="border px-4 py-2">{{ $employee->last_name }}</td>
                         <td class="border px-4 py-2">{{ $employee->contact_number }}</td>
+                        <td class="border px-4 py-2">
+                            <a href="{{ route('employees.edit', ['employeeCode' => $employee->code]) }}">EDIT</a>
+                            <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}">DELETE</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
