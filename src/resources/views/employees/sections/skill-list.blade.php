@@ -1,7 +1,7 @@
 <h4 class="mb-4 mt-0 text-2xl font-medium leading-tight text-secondary sasoft-secondary-text">
     Skills
 </h4>
-<div>
+<div class="w-full">
     @forelse($skills as $skill)
         <div class="flex mb-2">
             <div class="w-1/3 md:w-1/3 sm:w-1/3 px-1 mb-2">
@@ -52,7 +52,7 @@
         </div>
     @endforelse
 
-    <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50">
+    <button type="button" class="inline-flex items-center ml-1 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50">
         + Add New Skill
     </button>
 </div>
