@@ -33,4 +33,9 @@ class Index extends Component
             'employees' => EmployeeRepository::searchList($this->search, $this->filterOn),
         ]);
     }
+
+    public function createEmployee()
+    {
+        return redirect()->route('employees.create');
+    }
 }

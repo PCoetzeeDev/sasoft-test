@@ -8,7 +8,7 @@ use LivewireUI\Modal\ModalComponent;
 
 class Edit extends ModalComponent
 {
-    public string $employeeCode;
+    public string|null $employeeCode;
 
     /**
      * Supported: 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'
@@ -18,14 +18,17 @@ class Edit extends ModalComponent
         return 'md';
     }
 
-    public function mount(string $employeeCode)
+    public function mount(?string $employeeCode = null)
     {
         $this->employeeCode = $employeeCode;
     }
 
     public function render()
     {
-        $employee = EmployeeRepository::findByCode($this->employeeCode) ?? new Employee();
+        $employee = new Employee();
+        if ($this->employeeCode !== null) {
+            $employee = EmployeeRepository::findByCode($this->employeeCode) ?? new Employee();
+        }
 
         return view('livewire.employees.edit', [
             'employee' => $employee,

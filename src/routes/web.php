@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('employees');
+});
+
+Route::name('employees')->prefix('/employees')->group(function () {
+    Route::get('/create', [EmployeeController::class, 'create'])->name('.create');
+    Route::post('/store', [EmployeeController::class, 'store'])->name('.store');
+    Route::get('/edit/{employeeCode}', [EmployeeController::class, 'edit'])->name('.edit');
+    Route::post('/update', [EmployeeController::class, 'update'])->name('.update');
 });
 
 Route::get('/dashboard', function () {

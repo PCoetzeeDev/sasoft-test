@@ -2,24 +2,34 @@
 
 namespace App\Http\Livewire\Employees\Modal;
 
-use App\Lib\Employee\EmployeeRepository;
+use App\Lib\Employee\EmployeeSkill;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class SkillList extends Component
 {
-    public string $employeeCode;
+    public Collection $skills;
 
-    public function mount(string $employeeCode)
+    protected $listeners = [
+        'createSkill' => 'addSkillRow',
+    ];
+
+    public function mount(Collection $skills)
     {
-        $this->employeeCode = $employeeCode;
+        $this->skills = $skills;
     }
 
     public function render()
     {
-        $employee = EmployeeRepository::findByCode($this->employeeCode);
-
         return view('livewire.employees.modal.skill-list', [
-            'employeeSkills' => $employee->getSkills(),
+            'skills' => $this->skills,
         ]);
+    }
+
+    public function addSkillRow()
+    {
+        Log::error('Caught event');
+        $this->skills->append(new EmployeeSkill());
     }
 }
