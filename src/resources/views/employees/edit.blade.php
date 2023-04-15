@@ -27,4 +27,7 @@
 
         </form>
     </div>
+    <div class="flex w-full justify-center mt-10">
+        <a href="{{ url()->route('index') }}">Click here to go back to the start</a>
+    </div>
 </x-guest-layout>

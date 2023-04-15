@@ -44,7 +44,7 @@
                 </thead>
                 <tbody>
                     @foreach($employees as $key => $employee)
-                        <tr class="sasoft-row px-6">
+                        <tr class="sasoft-row px-6 text-center">
                             <td class="rounded-l-full px-4 py-2">{{ $employee->first_name }}</td>
                             <td class="px-4 py-2">{{ $employee->last_name }}</td>
                             <td class="px-4 py-2">{{ $employee->contact_number }}</td>

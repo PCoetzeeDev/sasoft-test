@@ -25,4 +25,7 @@
             <button type="submit" class="inline-flex px-4 py-2 sasoft-button">Save</button>
         </form>
     </div>
+    <div class="flex w-full justify-center mt-10">
+        <a href="{{ url()->route('index') }}">Click here to go back to the start</a>
+    </div>
 </x-guest-layout>
