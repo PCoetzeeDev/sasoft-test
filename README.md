@@ -6,10 +6,10 @@
 
     git clone git@github.com:PCoetzeeDev/sasoft-test.git && cd sasoft-test
 
-2. Add the following domain in your hosts file pointing to 127.0.0.1
+2. Add the following domain in your hosts file pointing to localhost, like so:
 
 
-    sasofttest.local
+    127.0.0.1       sasofttest.local        sasofttest
 
 
 4. Go into the docker folder, run the env.sh script
