@@ -1,24 +1,22 @@
 # Test Project for SA Soft
 
 ### How to run this app
-1. First clone the repo
-
+Step 1: First clone the repo
 
     git clone git@github.com:PCoetzeeDev/sasoft-test.git && cd sasoft-test
-2. Add the following domain in your hosts file pointing to localhost, like so:
-
+Step 2: Add the following domain in your hosts file pointing to localhost, like so:
 
     127.0.0.1       sasofttest.local        sasofttest
-4. Go into the docker folder, run the env.sh script
-
+Step 3: Go into the docker folder, run the env.sh script
 
     cd docker && ./env.sh
-3. Next, run the up.sh script which should build and start the app
-
+Step 4: Next, run the up.sh script which should build and start the app
 
     ./up.sh
 
 That should be it!
+
+--------------------------------------------------------------------------------------------------------------------------------
 
 ### Other useful scripts in /docker
     seed.sh
