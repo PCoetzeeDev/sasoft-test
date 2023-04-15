@@ -78,6 +78,9 @@ class EmployeeController extends Controller
 
     public function delete(string $employeeCode)
     {
-        dd(__METHOD__);
+        $employee = EmployeeRepository::findByCode($employeeCode);
+        $employee->delete();
+
+        return redirect()->back();
     }
 }
