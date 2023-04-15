@@ -54,7 +54,7 @@
                                         <a href="{{ route('employees.edit', ['employeeCode' => $employee->code]) }}">&#9998;</a>
                                     </div>
                                     <div class="w-1/2 text-center text-2xl" style="padding-left: 10px;">
-                                        <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}">&#128465;</a>
+                                        <a href="{{ route('employees.delete', ['employeeCode' => $employee->code]) }}" onclick="return confirm('Really delete this employee?');">&#128465;</a>
                                     </div>
                                 </div>
                             </td>
