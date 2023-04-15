@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lib\Employee\EmployeeRepository;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -22,11 +23,15 @@ class EmployeeController extends Controller
 
     public function edit(string $employeeCode)
     {
-        dd(__METHOD__);
+        $employee = EmployeeRepository::findByCode($employeeCode);
+
+        return view('employees.edit', [
+            'employee' => $employee,
+        ]);
     }
 
     public function update(Request $request)
     {
-        dd(__METHOD__);
+        dd($request->all());
     }
 }
