@@ -34,7 +34,7 @@ class UpdateEmployeeRequest extends FormRequest
             'basic.date_of_birth' => 'required|date',
             'address.street' => 'required',
             'address.city' => 'required',
-            'address.postal_code' => 'required|numeric',
+            'address.postal_code' => 'required',
             'address.country' => 'required',
             'skills.*.skill_name' => 'sometimes|nullable',
             'skills.*.years_experience' => 'sometimes|nullable', Rule::in(EmployeeSkill::YEARS_EXPERIENCE),
@@ -57,7 +57,6 @@ class UpdateEmployeeRequest extends FormRequest
             'address.street.required' => 'Street required',
             'address.city.required' => 'City required',
             'address.postal_code.required' => 'Postal Code required',
-            'address.postal_code.numeric' => 'Postal Code can only be numeric',
             'address.country.required' => 'Country required',
         ];
     }

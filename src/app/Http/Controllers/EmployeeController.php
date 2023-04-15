@@ -93,13 +93,26 @@ class EmployeeController extends Controller
         $address = EmployeeAddressFactory::instantiate($request->input('address'));
         $skills = EmployeeSkillFactory::transformIntoCollectionForEmployee($request->input('skills'), $employee);
 
-        $employee
-            ->saveAddress($address)
-            ->saveSkills($skills)
-            ->update($request->input('basic'));
+        try {
+            DB::beginTransaction();
 
-        flash('Employee successfully updated',
+            $employee
+                ->saveAddress($address)
+                ->saveSkills($skills)
+                ->update($request->input('basic'));
+
+            DB::commit();
+
+            flash('Employee successfully updated',
                 ['p-4', 'mb-4', 'text-sm', 'rounded-lg', 'sasoft-success']);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            Log::error($exception->getMessage(), $exception->getTrace());
+
+            flash('Failed to update employee',
+                ['p-4', 'mb-4', 'text-sm', 'rounded-lg', 'sasoft-error']);
+        }
 
         return redirect()->back();
     }
