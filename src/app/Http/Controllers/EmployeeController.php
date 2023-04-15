@@ -8,6 +8,7 @@ use App\Lib\Employee\EmployeeRepository;
 use App\Lib\Employee\EmployeeSkill;
 use App\Lib\Employee\EmployeeSkillFactory;
 use App\Lib\Employee\SkillRating;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -25,6 +26,12 @@ class EmployeeController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws \App\Exceptions\InstantiateAttemptInWrongEnvException
+     * @throws \App\Exceptions\UnknownEnvironmentException
+     */
     public function store(Request $request)
     {
         try {
@@ -47,9 +54,13 @@ class EmployeeController extends Controller
             throw $exception;
         }
 
-        return redirect()->back();
+        return redirect()->route('employees.edit', ['employeeCode' => $employee->code]);
     }
 
+    /**
+     * @param string $employeeCode
+     * @return \Illuminate\Contracts\View\View
+     */
     public function edit(string $employeeCode)
     {
         $employee = EmployeeRepository::findByCode($employeeCode);
@@ -62,6 +73,12 @@ class EmployeeController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws \App\Exceptions\InstantiateAttemptInWrongEnvException
+     * @throws \App\Exceptions\UnknownEnvironmentException
+     */
     public function update(Request $request)
     {
         $employee = EmployeeRepository::findByCode($request->input('employee_code'));
@@ -76,6 +93,11 @@ class EmployeeController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param string $employeeCode
+     * @return RedirectResponse
+     * @throws \Exception
+     */
     public function delete(string $employeeCode)
     {
         $employee = EmployeeRepository::findByCode($employeeCode);
