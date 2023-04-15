@@ -19,7 +19,6 @@ class EmployeeController extends Controller
     {
         return view('employees.create', [
             'skillRatingOptions' => SkillRating::getForFormSelectBySlug(),
-            'SkillOptions' => EmployeeSkill::SKILL_NAMES,
             'expOptions' => EmployeeSkill::YEARS_EXPERIENCE,
         ]);
     }
