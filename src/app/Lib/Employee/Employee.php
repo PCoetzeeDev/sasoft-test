@@ -93,6 +93,25 @@ class Employee extends BaseEntity
     }
 
     /**
+     * @param Collection $skills
+     * @return self
+     */
+    public function saveSkills(Collection $skills) : self
+    {
+        // First delete skills no longer there:
+        $this->getSkills()->whereNotIn('skill_name', $skills->pluck('skill_name'))
+            ->each(function (EmployeeSkill $skill) {
+            $skill->delete();
+        });
+
+        // Then upsert reset of the skills:
+        $this->skills()->upsert($skills->toArray(), ['skill_name', 'employee_id']);
+
+
+        return $this->refresh();
+    }
+
+    /**
      * @return EmployeeAddress
      */
     public function getAddress() : EmployeeAddress

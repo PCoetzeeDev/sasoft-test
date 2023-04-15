@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Lib\Employee\EmployeeAddress;
 use App\Lib\Employee\EmployeeAddressFactory;
 use App\Lib\Employee\EmployeeRepository;
 use App\Lib\Employee\EmployeeSkill;
+use App\Lib\Employee\EmployeeSkillFactory;
 use App\Lib\Employee\SkillRating;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -46,9 +46,11 @@ class EmployeeController extends Controller
     {
         $employee = EmployeeRepository::findByCode($request->input('employee_code'));
         $address = EmployeeAddressFactory::instantiate($request->input('address'));
+        $skills = EmployeeSkillFactory::transformIntoCollectionForEmployee($request->input('skills'), $employee);
 
         $employee
             ->saveAddress($address)
+            ->saveSkills($skills)
             ->update($request->input('basic'));
 
         return redirect()->back();
