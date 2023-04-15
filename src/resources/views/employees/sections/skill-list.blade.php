@@ -1,9 +1,9 @@
 <h4 class="mb-4 mt-0 text-2xl font-medium leading-tight text-secondary sasoft-secondary-text">
     Skills
 </h4>
-<div class="w-full">
+<div class="w-full" id="skill-list">
     @forelse($skills as $skill)
-        <div class="flex mb-2" id="row{{ $loop->index }}">
+        <div class="flex mb-2 skill-row" id="row{{ $loop->index }}">
             <div class="w-1/3 px-1 mb-2">
                 <label class="block text-xs font-bold mb-2" for="{{ 'txtSkillName' . $loop->index }}">
                     Skill
@@ -24,11 +24,11 @@
                 {{ Form::select("skills[$loop->index][skill_rating]", $skillRatingOptions, $skill->getSkillRating()->getSlug(), ['id' => 'txtSkillRating' . $loop->index, 'class' => 'border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-purple-500']) }}
             </div>
             <div class="flex w-1/4 px-1 justify-center items-center">
-                <div class="text-center"><a href="#" onclick="deleteRow('row{{ $loop->index }}');return false;">&#128465;</a></div>
+                <div class="text-center text-2xl"><a href="#" onclick="deleteRow('row{{ $loop->index }}');return false;">&#128465;</a></div>
             </div>
         </div>
     @empty
-        <div class="flex mb-2" id="row0">
+        <div class="flex mb-2 skill-row" id="row0">
             <div class="w-full px-1 mb-2">
                 <label class="block text-xs font-bold mb-2" for="txtSkillName0">
                     Skill
@@ -49,19 +49,28 @@
                 {{ Form::select("skills[0][skill_rating]", $skillRatingOptions, null, ['id' => 'txtSkillRating0', 'class' => 'border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-purple-500']) }}
             </div>
             <div class="flex w-1/4 px-1 justify-center items-center">
-                <div class="text-center"><a href="#" onclick="deleteRow('row0');return false;" >&#128465;</a></div>
+                <div class="text-center text-2xl"><a href="#" onclick="deleteRow('row0');return false;" >&#128465;</a></div>
             </div>
         </div>
     @endforelse
+</div>
 
-    <button type="button" class="inline-flex items-center ml-1 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50">
+<button type="button" onclick="addRow();" class="inline-flex items-center ml-1 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50">
         + Add New Skill
     </button>
-</div>
 
 <script>
     function deleteRow (rowId) {
         let row = document.getElementById(rowId);
         row.remove();
+    }
+    function addRow() {
+        let list = document.getElementById('skill-list');
+        let lastRowId = list.lastElementChild.id;
+        let nextRowId = lastRowId.substring(3); // Works because the first word is row
+
+        let clone = list.lastElementChild.cloneNode(true);
+
+        console.log(clone);
     }
 </script>
