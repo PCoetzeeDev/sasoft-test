@@ -6,6 +6,7 @@ COMPOSE_FILE="../docker-compose.yml"
 
 docker-compose --file $COMPOSE_FILE up --build --detach && \
 docker exec sasoft-test-app composer install && \
+docker exec sasoft-test-app php artisan migrate && \
 docker exec sasoft-test-app npm install && \
 docker exec sasoft-test-app npm run build
 
