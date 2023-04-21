@@ -120,6 +120,19 @@ class Employee extends BaseEntity
     }
 
     /**
+     * @return array
+     */
+    public function getSkillsArr() : array
+    {
+        $arr = $this->getSkills()->toArray();
+        foreach ($arr as $key => $value) {
+            $arr[$key]['skill_rating'] = SkillRating::getById($value['skill_rating_id']);
+        }
+
+        return $arr;
+    }
+
+    /**
      * @return Collection<EmployeeSkill>
      */
     public function getSkills() : Collection

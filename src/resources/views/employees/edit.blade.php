@@ -17,7 +17,7 @@
                     @include('employees.sections.address-info', ['address' => $employee->getAddress()])
                 </div>
                 <div class="border-l-4 border-purple-400 p-2 pt-0">
-                    @include('employees.sections.skill-list', ['skills' => $employee->getSkills()])
+                    @include('employees.sections.skill-list-livewire', ['employee' => $employee])
                 </div>
             </div>
 

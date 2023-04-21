@@ -16,7 +16,7 @@
                     @include('employees.sections.address-info')
                 </div>
                 <div class="border-l-4 border-purple-400 p-2 pt-0">
-                    @include('employees.sections.skill-list', ['skills' => new \Illuminate\Database\Eloquent\Collection()])
+                    @include('employees.sections.skill-list-livewire', ['employee' => $employee])
                 </div>
             </div>
 

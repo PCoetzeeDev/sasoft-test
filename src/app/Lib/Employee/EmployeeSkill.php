@@ -96,7 +96,7 @@ class EmployeeSkill extends BaseEntity
     /**
      * @return BelongsTo
      */
-    protected function skill_rating() : BelongsTo
+    public function skill_rating() : BelongsTo
     {
         return $this->belongsTo(SkillRating::class);
     }
@@ -104,7 +104,7 @@ class EmployeeSkill extends BaseEntity
     /**
      * @return BelongsTo
      */
-    protected function employee() : BelongsTo
+    public function employee() : BelongsTo
     {
         return $this->belongsTo(Employee::class);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Lib\Employee\Employee;
 use App\Lib\Employee\EmployeeAddressFactory;
 use App\Lib\Employee\EmployeeFactory;
 use App\Lib\Employee\EmployeeRepository;
@@ -25,6 +26,7 @@ class EmployeeController extends Controller
         return view('employees.create', [
             'skillRatingOptions' => SkillRating::getForFormSelectBySlug(),
             'expOptions' => EmployeeSkill::YEARS_EXPERIENCE,
+            'employee' => new Employee(),
         ]);
     }
 
